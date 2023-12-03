@@ -3,7 +3,7 @@ export interface Manipulator {
 }
 
 
-export class ReplaceManipulator implements Manipulator {
+export class ReplaceManipulator {
   searchValue: string
   replaceValue: string
 
