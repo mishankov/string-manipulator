@@ -1,6 +1,6 @@
 <script lang="ts">
   import { type Manipulator, ReplaceManipulator } from "./manipulator";
-  import Replace from "./components/manipulations/Replace.svelte";
+  import Replace from "./manipulations/components/Replace.svelte";
 
   let source = ""
   let result = ""
