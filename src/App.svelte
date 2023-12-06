@@ -1,9 +1,15 @@
 <script lang="ts">
   import { type Manipulator, ReplaceManipulator } from "./manipulator";
-  import Replace from "./manipulations/components/Replace.svelte";
+  import type { Manipulation } from "./manipulations";
+  import ManipulationsPanel from "./ManipulationsPanel.svelte";
+  
 
-  let source = ""
+  let source = "Try me!\nPress \"Apply\""
   let result = ""
+  let manipulations: Manipulation[] = [{
+    type: "replace",
+    from: "\\n", to: "--"
+  }]
 
   function applyManipulators(source: string, manipulators?: Manipulator[]) {
     if (!manipulators) {
@@ -15,7 +21,20 @@
     }, source)
   }
 
-  $: result = applyManipulators(source, [new ReplaceManipulator("\n", " - ")])
+  function applyManipulations(event: MouseEvent) {
+    console.log(manipulations)
+    
+    if (event.type == "click") {
+      result = applyManipulators(source, manipulations.map((manipulation, index, array) => {
+        switch (manipulation.type){
+          case "replace": return new ReplaceManipulator(manipulation.from, manipulation.to)
+        }
+      }))
+    }
+    
+  }
+
+  // $: result = applyManipulators(source, [new ReplaceManipulator("\n", " - ")])
 </script>
 
 <div class="panels">
@@ -30,11 +49,10 @@
   </div>
 
   <div id="panel">
-    <label for="manipulations">Manipulations</label>
-    <div id="manipulations" class="manipulations">
-      <Replace />
-    </div>
+    <ManipulationsPanel bind:manipulations />
+    <button on:click={applyManipulations}>Apply</button>
   </div>
+  
 </div>
 
 

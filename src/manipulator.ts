@@ -11,7 +11,8 @@ export class ReplaceManipulator {
     this.searchValue = searchValue
     this.replaceValue = replaceValue
   }
+
   do(input: string) {
-    return input.replaceAll(this.searchValue, this.replaceValue)
+    return input.replaceAll(new RegExp(this.searchValue, "g"), this.replaceValue)
   }
 }
