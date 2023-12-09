@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { type Manipulator, ReplaceManipulator } from "./manipulator";
-  import type { Manipulation } from "./manipulations";
+  import  { type Manipulation, doManipulation } from "./manipulations";
   import ManipulationsPanel from "./ManipulationsPanel.svelte";
   
 
@@ -11,27 +10,14 @@
     from: "\\n", to: "--"
   }]
 
-  function applyManipulators(source: string, manipulators?: Manipulator[]) {
-    if (!manipulators) {
-      return source
-    }
-
-    return manipulators.reduce((previousResult, currentManipulator) => {
-      return currentManipulator.do(previousResult)
-    }, source)
-  }
-
   function applyManipulations(event: MouseEvent) {
     console.log(manipulations)
     
     if (event.type == "click") {
-      result = applyManipulators(source, manipulations.map((manipulation, index, array) => {
-        switch (manipulation.type){
-          case "replace": return new ReplaceManipulator(manipulation.from, manipulation.to)
-        }
-      }))
+      result = manipulations.reduce((previousResult, curentManipulation) => {
+        return doManipulation(previousResult, curentManipulation)
+      }, source)
     }
-    
   }
 
   // $: result = applyManipulators(source, [new ReplaceManipulator("\n", " - ")])
