@@ -43,5 +43,4 @@
     <option value="add">Add</option>
     <option value="replace">Replace</option>
   </select>
-  <button on:click={addManipulation}>Add</button>
 </div>

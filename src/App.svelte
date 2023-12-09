@@ -10,17 +10,19 @@
     from: "\\n", to: "--"
   }]
 
-  function applyManipulations(event: MouseEvent) {
-    console.log(manipulations)
-    
-    if (event.type == "click") {
-      result = manipulations.reduce((previousResult, curentManipulation) => {
+  function applyManipulations(source: string, manipulations: Manipulation[]): string {
+    return manipulations.reduce((previousResult, curentManipulation) => {
         return doManipulation(previousResult, curentManipulation)
-      }, source)
+    }, source)
+  }
+
+  function onApply(event: MouseEvent) {
+    if (event.type == "click") {
+      result = applyManipulations(source, manipulations)
     }
   }
 
-  // $: result = applyManipulators(source, [new ReplaceManipulator("\n", " - ")])
+  $: result = applyManipulations(source, manipulations)
 </script>
 
 <div class="panels">
@@ -36,7 +38,7 @@
 
   <div id="panel">
     <ManipulationsPanel bind:manipulations />
-    <button on:click={applyManipulations}>Apply</button>
+    <button on:click={onApply}>Apply</button>
   </div>
   
 </div>
