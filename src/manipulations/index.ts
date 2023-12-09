@@ -1,8 +1,10 @@
-import { type ReplaceManipulation } from "./components/Replace.svelte";
-import { type AppendManipulation } from "./components/Append.svelte";
+import Replace, { type ReplaceManipulation } from "./components/Replace.svelte"
+import Append, { type AppendManipulation }  from "./components/Append.svelte"
 
+// Union type for all manipulations
 export type Manipulation = ReplaceManipulation | AppendManipulation
 
+// Function to apply manipulations
 export function doManipulation(input: string, manipulation: Manipulation): string {
   switch (manipulation.type) {
     case "replace": {
@@ -13,3 +15,6 @@ export function doManipulation(input: string, manipulation: Manipulation): strin
     }
   }
 }
+
+// Re-export components
+export { Replace, Append }

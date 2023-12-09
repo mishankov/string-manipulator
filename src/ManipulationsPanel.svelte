@@ -1,11 +1,8 @@
 <script lang="ts">
   import type { Manipulation } from "./manipulations";
-    import Append from "./manipulations/components/Append.svelte";
-  import Replace from "./manipulations/components/Replace.svelte";
+  import { Replace, Append } from "./manipulations";
 
   export let manipulations: Manipulation[] = []
-
-  let newManipulationSelect = ""
 
   function onNewManipulationSelect(event: Event) {
     const target = event.target as HTMLSelectElement
@@ -22,7 +19,6 @@
     manipulations = manipulations
     target.value = "add"
   }
-
 </script>
 
 <div>
