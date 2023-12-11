@@ -1,12 +1,13 @@
 import Replace, { type ReplaceManipulation } from "./components/Replace.svelte"
 import Append, { type AppendManipulation }  from "./components/Append.svelte"
 import Prepend, { type PrependManipulation }  from "./components/Prepend.svelte"
+import SplitGetFromIndex, { type SplitGetFromIndexManipulation }  from "./components/SplitGetFromIndex.svelte"
 
 // Re-export components
-export { Replace, Append, Prepend }
+export { Replace, Append, Prepend, SplitGetFromIndex }
 
 // Union type for all manipulations
-export type Manipulation = ReplaceManipulation | AppendManipulation | PrependManipulation
+export type Manipulation = ReplaceManipulation | AppendManipulation | PrependManipulation | SplitGetFromIndexManipulation
 
 function prepareInput(input:string): string {
   const stuffToReplace = [
@@ -31,6 +32,16 @@ export function doManipulation(input: string, manipulation: Manipulation): strin
     }
     case "prepend": {
       return prepareInput(manipulation.prefix) + input
+    }
+    case "splitGetFromIndex": {
+      if (manipulation.splitString.length === 0) return input
+      let splittedInput = input.split(manipulation.splitString)
+
+      if (splittedInput.length - 1 >= manipulation.index) {
+        return splittedInput[manipulation.index]
+      } else {
+        return input
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Manipulation } from "./manipulations";
-  import { Replace, Append, Prepend } from "./manipulations";
+  import { Replace, Append, Prepend, SplitGetFromIndex } from "./manipulations";
 
   export let manipulations: Manipulation[] = []
 
@@ -23,6 +23,11 @@
           type: "prepend", prefix: ""
         })
         break
+      case "splitGetFromIndex":
+        manipulations.push({
+          type: "splitGetFromIndex", splitString: "", index: 0
+        })
+        break
     }
     
     manipulations = manipulations
@@ -43,6 +48,8 @@
           <Prepend bind:prefix={manipulation.prefix} />
         {:else if manipulation.type == "append"}
           <Append bind:suffix={manipulation.suffix} />
+        {:else if manipulation.type == "splitGetFromIndex"}
+          <SplitGetFromIndex bind:splitString={manipulation.splitString} bind:index={manipulation.index} />
         {/if}
     {/each}
   </div>
@@ -52,5 +59,6 @@
     <option value="replace">Replace</option>
     <option value="append">Append</option>
     <option value="prepend">Prepend</option>
+    <option value="splitGetFromIndex">Split, get from index</option>
   </select>
 </div>
