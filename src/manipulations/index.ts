@@ -8,17 +8,29 @@ export { Replace, Append, Prepend }
 // Union type for all manipulations
 export type Manipulation = ReplaceManipulation | AppendManipulation | PrependManipulation
 
+function prepareInput(input:string): string {
+  const stuffToReplace = [
+    ["\\\\n", "\n"], ["\\\\t", "\t"] 
+  ]
+
+  let preparedInput = stuffToReplace.reduce((previousResult, currentValue, index, array) => {
+    return previousResult.replaceAll(new RegExp(currentValue[0], "g"), currentValue[1])
+  }, input)
+
+  return preparedInput
+}
+
 // Function to apply manipulations
 export function doManipulation(input: string, manipulation: Manipulation): string {
   switch (manipulation.type) {
     case "replace": {
-      return input.replaceAll(new RegExp(manipulation.from, "g"), manipulation.to)
+      return input.replaceAll(new RegExp(manipulation.from, "g"), prepareInput(manipulation.to))
     }
     case "append": {
-      return input + manipulation.suffix
+      return input + prepareInput(manipulation.suffix)
     }
     case "prepend": {
-      return manipulation.prefix + input
+      return prepareInput(manipulation.prefix) + input
     }
   }
 }
