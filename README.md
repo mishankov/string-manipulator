@@ -14,5 +14,5 @@ Manipulations:
 - [x] replace
 - [x] append
 - [x] prepend
-- [ ] compose
+- [x] compose
 - [ ] slice ((`asdfg`, `2`, `4`) => `sdf`)
