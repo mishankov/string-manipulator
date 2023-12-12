@@ -11,5 +11,5 @@
 </script>
 
 <div>
-  <span>Replace from </span><input bind:value={from} /><span> to </span><input bind:value={to} />
+  <span>Replace from</span> <input bind:value={from} /> <span>to</span> <input bind:value={to} />
 </div>

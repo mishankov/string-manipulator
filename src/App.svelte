@@ -61,4 +61,9 @@
     display: block;
     margin-bottom: 10px;
   }
+
+  textarea {
+    height: 500px;
+    width: 300px;
+  }
 </style>
