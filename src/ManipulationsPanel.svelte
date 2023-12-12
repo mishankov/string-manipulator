@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Manipulation } from "./manipulations";
-  import { Replace, Append, Prepend, SplitGetFromIndex } from "./manipulations";
+  import { Replace, Append, Prepend, SplitGetFromIndex, Compose } from "./manipulations";
 
   export let manipulations: Manipulation[] = []
 
@@ -28,6 +28,11 @@
           type: "splitGetFromIndex", splitString: "", index: 0
         })
         break
+      case "compose":
+        manipulations.push({
+          type: "compose", pattern: "{}", placeholder: "{}"
+        })
+        break
     }
     
     manipulations = manipulations
@@ -37,7 +42,7 @@
   $: console.log(manipulations)
 </script>
 
-<div>
+<div class="panel">
   <label for="manipulations">Manipulations</label>
 
   <div id="manipulations" class="manipulations">
@@ -50,6 +55,8 @@
           <Append bind:suffix={manipulation.suffix} />
         {:else if manipulation.type == "splitGetFromIndex"}
           <SplitGetFromIndex bind:splitString={manipulation.splitString} bind:index={manipulation.index} />
+        {:else if manipulation.type == "compose"}
+          <Compose bind:pattern={manipulation.pattern} bind:placeholder={manipulation.placeholder} />
         {/if}
     {/each}
   </div>
@@ -60,5 +67,15 @@
     <option value="append">Append</option>
     <option value="prepend">Prepend</option>
     <option value="splitGetFromIndex">Split, get from index</option>
+    <option value="compose">Compose</option>
   </select>
 </div>
+
+
+<style>
+  .manipulations, .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+</style>

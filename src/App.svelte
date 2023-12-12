@@ -26,17 +26,17 @@
 </script>
 
 <div class="panels">
-  <div id="panel">
+  <div class="panel">
     <label for="source">Source</label>
     <textarea id="source" bind:value={source}/>
   </div>
   
-  <div id="panel">
+  <div class="panel">
     <label for="result">Result</label>
     <textarea id="result" bind:value={result}/>
   </div>
 
-  <div id="panel">
+  <div class="panel">
     <ManipulationsPanel bind:manipulations />
     <button on:click={onApply}>Apply</button>
   </div>
@@ -48,6 +48,12 @@
   .panels {
     display: flex;
     flex-direction: row;
+    gap: 10px;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 

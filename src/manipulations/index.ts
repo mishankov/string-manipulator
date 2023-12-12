@@ -2,12 +2,13 @@ import Replace, { type ReplaceManipulation } from "./components/Replace.svelte"
 import Append, { type AppendManipulation }  from "./components/Append.svelte"
 import Prepend, { type PrependManipulation }  from "./components/Prepend.svelte"
 import SplitGetFromIndex, { type SplitGetFromIndexManipulation }  from "./components/SplitGetFromIndex.svelte"
+import Compose, {type ComposeManipulation } from "./components/Compose.svelte"
 
 // Re-export components
-export { Replace, Append, Prepend, SplitGetFromIndex }
+export { Replace, Append, Prepend, SplitGetFromIndex, Compose }
 
 // Union type for all manipulations
-export type Manipulation = ReplaceManipulation | AppendManipulation | PrependManipulation | SplitGetFromIndexManipulation
+export type Manipulation = ReplaceManipulation | AppendManipulation | PrependManipulation | SplitGetFromIndexManipulation | ComposeManipulation
 
 function prepareInput(input:string): string {
   const stuffToReplace = [
@@ -42,6 +43,9 @@ export function doManipulation(input: string, manipulation: Manipulation): strin
       } else {
         return input
       }
+    }
+    case "compose": {
+      return prepareInput(manipulation.pattern).replaceAll(manipulation.placeholder, input)
     }
   }
 }
