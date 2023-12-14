@@ -1,11 +1,11 @@
-import Replace, { type ReplaceManipulation } from "./components/Replace.svelte";
 import Append, { type AppendManipulation } from "./components/Append.svelte";
+import Compose, { type ComposeManipulation } from "./components/Compose.svelte";
 import Prepend, { type PrependManipulation } from "./components/Prepend.svelte";
+import Replace, { type ReplaceManipulation } from "./components/Replace.svelte";
+import Slice, { type SliceManipulation } from "./components/Slice.svelte";
 import SplitGetFromIndex, {
 	type SplitGetFromIndexManipulation,
 } from "./components/SplitGetFromIndex.svelte";
-import Compose, { type ComposeManipulation } from "./components/Compose.svelte";
-import Slice, { type SliceManipulation } from "./components/Slice.svelte";
 
 // Re-export components
 export { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice };

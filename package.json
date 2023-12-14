@@ -8,8 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "lint": "@biomejs/biome lint src --apply",
-    "format": "npx @biomejs/biome format src --write"
+    "lint": "npx @biomejs/biome check --apply src"
   },
   "devDependencies": {
     "@biomejs/biome": "1.4.1",
