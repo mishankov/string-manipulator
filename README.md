@@ -15,4 +15,4 @@ Manipulations:
 - [x] append
 - [x] prepend
 - [x] compose
-- [ ] slice ((`asdfg`, `2`, `4`) => `sdf`)
+- [x] slice ((`asdfg`, `2`, `4`) => `sdf`)

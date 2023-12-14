@@ -3,12 +3,13 @@ import Append, { type AppendManipulation }  from "./components/Append.svelte"
 import Prepend, { type PrependManipulation }  from "./components/Prepend.svelte"
 import SplitGetFromIndex, { type SplitGetFromIndexManipulation }  from "./components/SplitGetFromIndex.svelte"
 import Compose, {type ComposeManipulation } from "./components/Compose.svelte"
+import Slice, { type SliceManipulation } from "./components/Slice.svelte"
 
 // Re-export components
-export { Replace, Append, Prepend, SplitGetFromIndex, Compose }
+export { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice }
 
 // Union type for all manipulations
-export type Manipulation = ReplaceManipulation | AppendManipulation | PrependManipulation | SplitGetFromIndexManipulation | ComposeManipulation
+export type Manipulation = ReplaceManipulation | AppendManipulation | PrependManipulation | SplitGetFromIndexManipulation | ComposeManipulation | SliceManipulation
 
 function prepareInput(input:string): string {
   const stuffToReplace = [
@@ -46,6 +47,12 @@ export function doManipulation(input: string, manipulation: Manipulation): strin
     }
     case "compose": {
       return prepareInput(manipulation.pattern).replaceAll(manipulation.placeholder, input)
+    }
+    case "slice": {
+      if (manipulation.end === null) {
+        return input.slice(manipulation.start)
+      }
+      return input.slice(manipulation.start, manipulation.end)
     }
   }
 }

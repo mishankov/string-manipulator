@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Manipulation } from "./manipulations";
-  import { Replace, Append, Prepend, SplitGetFromIndex, Compose } from "./manipulations";
+  import { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice } from "./manipulations";
 
   export let manipulations: Manipulation[] = []
 
@@ -33,6 +33,11 @@
           type: "compose", pattern: "{}", placeholder: "{}"
         })
         break
+      case "slice":
+        manipulations.push({
+          type: "slice", start: 0, end: null
+        })
+        break
     }
     
     manipulations = manipulations
@@ -57,6 +62,8 @@
           <SplitGetFromIndex bind:splitString={manipulation.splitString} bind:index={manipulation.index} />
         {:else if manipulation.type == "compose"}
           <Compose bind:pattern={manipulation.pattern} bind:placeholder={manipulation.placeholder} />
+        {:else if manipulation.type == "slice"}
+          <Slice bind:start={manipulation.start} bind:end={manipulation.end} />
         {/if}
     {/each}
   </div>
@@ -68,6 +75,7 @@
     <option value="prepend">Prepend</option>
     <option value="splitGetFromIndex">Split, get from index</option>
     <option value="compose">Compose</option>
+    <option value="slice">Slice</option>
   </select>
 </div>
 
