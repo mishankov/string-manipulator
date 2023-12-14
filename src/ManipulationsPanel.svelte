@@ -35,7 +35,7 @@
         break
       case "slice":
         manipulations.push({
-          type: "slice", start: 0, end: null
+          type: "slice", start: 0, end: -1
         })
         break
     }
