@@ -3,21 +3,33 @@ import Compose, { type ComposeManipulation } from "./components/Compose.svelte";
 import Prepend, { type PrependManipulation } from "./components/Prepend.svelte";
 import Replace, { type ReplaceManipulation } from "./components/Replace.svelte";
 import Slice, { type SliceManipulation } from "./components/Slice.svelte";
+import SplitCompose, {
+	type SplitComposeManipulation,
+} from "./components/SplitCompose.svelte";
 import SplitGetFromIndex, {
 	type SplitGetFromIndexManipulation,
 } from "./components/SplitGetFromIndex.svelte";
 
 // Re-export components
-export { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice };
+export {
+	Append,
+	Compose,
+	Prepend,
+	Replace,
+	Slice,
+	SplitCompose,
+	SplitGetFromIndex,
+};
 
 // Union type for all manipulations
 export type Manipulation =
-	| ReplaceManipulation
 	| AppendManipulation
-	| PrependManipulation
-	| SplitGetFromIndexManipulation
 	| ComposeManipulation
-	| SliceManipulation;
+	| PrependManipulation
+	| ReplaceManipulation
+	| SliceManipulation
+	| SplitComposeManipulation
+	| SplitGetFromIndexManipulation;
 
 function prepareInput(input: string): string {
 	const stuffToReplace = [
@@ -77,6 +89,23 @@ export function doManipulation(
 				return input.slice(manipulation.start);
 			}
 			return input.slice(manipulation.start, manipulation.end);
+		}
+		case "splitCompose": {
+			if (manipulation.splitString.length === 0) return input;
+			const splittedInput = input.split(manipulation.splitString);
+
+			if (splittedInput.length === 1) return input;
+
+			return splittedInput.reduce(
+				(previousResult, currentValue, currentIndex, array) => {
+					const placeholderWithIndex = manipulation.placeholder.replaceAll(
+						"d",
+						currentIndex.toString(),
+					);
+					return previousResult.replaceAll(placeholderWithIndex, currentValue);
+				},
+				manipulation.pattern,
+			);
 		}
 	}
 }

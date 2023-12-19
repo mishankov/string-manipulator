@@ -1,12 +1,11 @@
 <script lang="ts">
   import type { Manipulation } from "./manipulations";
-  import { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice } from "./manipulations";
+  import { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice, SplitCompose } from "./manipulations";
 
   export let manipulations: Manipulation[] = []
 
   function onNewManipulationSelect(event: Event) {
     const target = event.target as HTMLSelectElement
-    console.log(target.value)
     switch (target.value) {
       case "replace": 
         manipulations.push({
@@ -38,13 +37,18 @@
           type: "slice", start: 0, end: -1
         })
         break
+      case "splitCompose":
+        manipulations.push({
+          type: "splitCompose", splitString: "!", placeholder: "{d}", pattern: "{1}, {0}"
+        })
+        break
     }
     
     manipulations = manipulations
     target.value = "add"
   }
 
-  $: console.log(manipulations)
+  // $: console.log(manipulations)
 </script>
 
 <div class="panel">
@@ -64,6 +68,8 @@
           <Compose bind:pattern={manipulation.pattern} bind:placeholder={manipulation.placeholder} />
         {:else if manipulation.type == "slice"}
           <Slice bind:start={manipulation.start} bind:end={manipulation.end} />
+        {:else if manipulation.type == "splitCompose"}
+          <SplitCompose bind:splitString={manipulation.splitString} bind:pattern={manipulation.pattern} bind:placeholder={manipulation.placeholder} />
         {/if}
     {/each}
   </div>
@@ -76,6 +82,7 @@
     <option value="splitGetFromIndex">Split, get from index</option>
     <option value="compose">Compose</option>
     <option value="slice">Slice</option>
+    <option value="splitCompose">Split-compose</option>
   </select>
 </div>
 
