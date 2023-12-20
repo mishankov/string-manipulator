@@ -10,6 +10,8 @@ import SplitGetFromIndex, {
 	type SplitGetFromIndexManipulation,
 } from "./components/SplitGetFromIndex.svelte";
 
+import Manipulation from "./components/Manipulation.svelte"
+
 // Re-export components
 export {
 	Append,
@@ -19,10 +21,12 @@ export {
 	Slice,
 	SplitCompose,
 	SplitGetFromIndex,
+
+	Manipulation
 };
 
 // Union type for all manipulations
-export type Manipulation =
+export type TManipulation =
 	| AppendManipulation
 	| ComposeManipulation
 	| PrependManipulation
@@ -30,6 +34,9 @@ export type Manipulation =
 	| SliceManipulation
 	| SplitComposeManipulation
 	| SplitGetFromIndexManipulation;
+
+// Supported manupulations to use in splitJoin
+export type InnerSplitJoinManipulation = TManipulation
 
 function prepareInput(input: string): string {
 	const stuffToReplace = [
@@ -53,7 +60,7 @@ function prepareInput(input: string): string {
 // Function to apply manipulations
 export function doManipulation(
 	input: string,
-	manipulation: Manipulation,
+	manipulation: TManipulation,
 ): string {
 	switch (manipulation.type) {
 		case "replace": {

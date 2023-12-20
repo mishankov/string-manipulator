@@ -1,16 +1,16 @@
 <script lang="ts">
-  import  { type Manipulation, doManipulation } from "./manipulations";
+  import  { type TManipulation, doManipulation } from "./manipulations";
   import ManipulationsPanel from "./ManipulationsPanel.svelte";
   
 
   let source = "Try me!\nPress \"Apply\""
   let result = ""
-  let manipulations: Manipulation[] = [{
+  let manipulations: TManipulation[] = [{
     type: "replace",
     from: "\\n", to: "--"
   }]
 
-  function applyManipulations(source: string, manipulations: Manipulation[]): string {
+  function applyManipulations(source: string, manipulations: TManipulation[]): string {
     return manipulations.reduce((previousResult, curentManipulation) => {
         return doManipulation(previousResult, curentManipulation)
     }, source)

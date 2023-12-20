@@ -1,0 +1,24 @@
+<script lang="ts">
+  import { type TManipulation } from "..";
+  import { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice, SplitCompose } from "..";
+
+  export let manipulation: TManipulation
+</script>
+
+<div>
+  {#if manipulation.type == "replace"}
+    <Replace bind:from={manipulation.from} bind:to={manipulation.to}/>
+  {:else if manipulation.type == "prepend"}
+    <Prepend bind:prefix={manipulation.prefix} />
+  {:else if manipulation.type == "append"}
+    <Append bind:suffix={manipulation.suffix} />
+  {:else if manipulation.type == "splitGetFromIndex"}
+    <SplitGetFromIndex bind:splitString={manipulation.splitString} bind:index={manipulation.index} />
+  {:else if manipulation.type == "compose"}
+    <Compose bind:pattern={manipulation.pattern} bind:placeholder={manipulation.placeholder} />
+  {:else if manipulation.type == "slice"}
+    <Slice bind:start={manipulation.start} bind:end={manipulation.end} />
+  {:else if manipulation.type == "splitCompose"}
+    <SplitCompose bind:splitString={manipulation.splitString} bind:pattern={manipulation.pattern} bind:placeholder={manipulation.placeholder} />
+  {/if}
+</div>
