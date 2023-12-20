@@ -62,6 +62,12 @@ function prepareInput(input: string): string {
 	return preparedInput;
 }
 
+export function applyManipulations(source: string, manipulations: TManipulation[]): string {
+	return manipulations.reduce((previousResult, curentManipulation) => {
+			return doManipulation(previousResult, curentManipulation)
+	}, source)
+}
+
 // Function to apply manipulations
 export function doManipulation(
 	input: string,
@@ -120,7 +126,13 @@ export function doManipulation(
 			);
 		}
 		case "splitJoin": {
-			return input
+			const splittedInput = input.split(prepareInput(manipulation.splitString));
+
+			const splittedInputProcessed = splittedInput.map((value, index, array) => {
+				return applyManipulations(value, manipulation.innerManipulations)
+			})
+
+			return splittedInputProcessed.join(prepareInput(manipulation.joinString))
 		}
 	}
 }

@@ -43,7 +43,7 @@
         break
       case "splitJoin":
         manipulations.push({
-          type: "splitJoin", splitString: ",", joinString: "{d}", innerManipulations: []
+          type: "splitJoin", splitString: ",", joinString: "!", innerManipulations: []
         })
         break
     }

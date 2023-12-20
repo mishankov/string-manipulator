@@ -1,5 +1,5 @@
 <script lang="ts">
-  import  { type TManipulation, doManipulation } from "./manipulations";
+  import  { type TManipulation, doManipulation, applyManipulations } from "./manipulations";
   import ManipulationsPanel from "./ManipulationsPanel.svelte";
   
 
@@ -10,11 +10,7 @@
     from: "\\n", to: "--"
   }]
 
-  function applyManipulations(source: string, manipulations: TManipulation[]): string {
-    return manipulations.reduce((previousResult, curentManipulation) => {
-        return doManipulation(previousResult, curentManipulation)
-    }, source)
-  }
+  
 
   function onApply(event: MouseEvent) {
     if (event.type == "click") {
