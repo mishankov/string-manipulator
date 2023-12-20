@@ -9,10 +9,12 @@ import SplitCompose, {
 import SplitGetFromIndex, {
 	type SplitGetFromIndexManipulation,
 } from "./components/SplitGetFromIndex.svelte";
-import SplitJoin, { type SplitJoinManipulation } from "./components/SplitJoin.svelte";
+import SplitJoin, {
+	type SplitJoinManipulation,
+} from "./components/SplitJoin.svelte";
 
-import Manipulation from "./components/Manipulation.svelte"
 import AddManipulation from "./components/AddManipulation.svelte";
+import Manipulation from "./components/Manipulation.svelte";
 
 // Re-export components
 export {
@@ -24,9 +26,8 @@ export {
 	SplitCompose,
 	SplitGetFromIndex,
 	SplitJoin,
-
 	Manipulation,
-	AddManipulation
+	AddManipulation,
 };
 
 // Union type for all manipulations
@@ -41,7 +42,7 @@ export type TManipulation =
 	| SplitJoinManipulation;
 
 // Supported manupulations to use in splitJoin
-export type InnerSplitJoinManipulation = TManipulation
+export type InnerSplitJoinManipulation = TManipulation;
 
 function prepareInput(input: string): string {
 	const stuffToReplace = [
@@ -62,10 +63,13 @@ function prepareInput(input: string): string {
 	return preparedInput;
 }
 
-export function applyManipulations(source: string, manipulations: TManipulation[]): string {
+export function applyManipulations(
+	source: string,
+	manipulations: TManipulation[],
+): string {
 	return manipulations.reduce((previousResult, curentManipulation) => {
-			return doManipulation(previousResult, curentManipulation)
-	}, source)
+		return doManipulation(previousResult, curentManipulation);
+	}, source);
 }
 
 // Function to apply manipulations
@@ -126,13 +130,11 @@ export function doManipulation(
 			);
 		}
 		case "splitJoin": {
-			const splittedInput = input.split(prepareInput(manipulation.splitString));
-
-			const splittedInputProcessed = splittedInput.map((value, index, array) => {
-				return applyManipulations(value, manipulation.innerManipulations)
-			})
-
-			return splittedInputProcessed.join(prepareInput(manipulation.joinString))
+			return input.split(prepareInput(manipulation.splitString)).map(
+				(value, index, array) => {
+					return applyManipulations(value, manipulation.innerManipulations);
+				},
+			).join(prepareInput(manipulation.joinString));
 		}
 	}
 }
