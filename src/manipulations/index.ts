@@ -9,6 +9,7 @@ import SplitCompose, {
 import SplitGetFromIndex, {
 	type SplitGetFromIndexManipulation,
 } from "./components/SplitGetFromIndex.svelte";
+import SplitJoin, { type SplitJoinManipulation } from "./components/SplitJoin.svelte";
 
 import Manipulation from "./components/Manipulation.svelte"
 import AddManipulation from "./components/AddManipulation.svelte";
@@ -22,6 +23,7 @@ export {
 	Slice,
 	SplitCompose,
 	SplitGetFromIndex,
+	SplitJoin,
 
 	Manipulation,
 	AddManipulation
@@ -35,7 +37,8 @@ export type TManipulation =
 	| ReplaceManipulation
 	| SliceManipulation
 	| SplitComposeManipulation
-	| SplitGetFromIndexManipulation;
+	| SplitGetFromIndexManipulation
+	| SplitJoinManipulation;
 
 // Supported manupulations to use in splitJoin
 export type InnerSplitJoinManipulation = TManipulation
@@ -115,6 +118,9 @@ export function doManipulation(
 				},
 				manipulation.pattern,
 			);
+		}
+		case "splitJoin": {
+			return input
 		}
 	}
 }

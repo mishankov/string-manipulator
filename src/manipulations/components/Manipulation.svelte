@@ -1,6 +1,6 @@
 <script lang="ts">
   import { type TManipulation } from "..";
-  import { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice, SplitCompose } from "..";
+  import { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice, SplitCompose, SplitJoin } from "..";
 
   export let manipulation: TManipulation
 </script>
@@ -20,5 +20,7 @@
     <Slice bind:start={manipulation.start} bind:end={manipulation.end} />
   {:else if manipulation.type == "splitCompose"}
     <SplitCompose bind:splitString={manipulation.splitString} bind:pattern={manipulation.pattern} bind:placeholder={manipulation.placeholder} />
+  {:else if manipulation.type == "splitJoin"}
+    <SplitJoin bind:splitString={manipulation.splitString} bind:joinString={manipulation.joinString} bind:innerManipulations={manipulation.innerManipulations}/>
   {/if}
 </div>

@@ -41,6 +41,11 @@
           type: "splitCompose", splitString: "!", placeholder: "{d}", pattern: "{1}, {0}"
         })
         break
+      case "splitJoin":
+        manipulations.push({
+          type: "splitJoin", splitString: ",", joinString: "{d}", innerManipulations: []
+        })
+        break
     }
     
     manipulations = manipulations
@@ -58,4 +63,5 @@
   <option value="compose">Compose</option>
   <option value="slice">Slice</option>
   <option value="splitCompose">Split-compose</option>
+  <option value="splitJoin">Split-join</option>
 </select>
