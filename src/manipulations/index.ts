@@ -11,6 +11,7 @@ import SplitGetFromIndex, {
 } from "./components/SplitGetFromIndex.svelte";
 
 import Manipulation from "./components/Manipulation.svelte"
+import AddManipulation from "./components/AddManipulation.svelte";
 
 // Re-export components
 export {
@@ -22,7 +23,8 @@ export {
 	SplitCompose,
 	SplitGetFromIndex,
 
-	Manipulation
+	Manipulation,
+	AddManipulation
 };
 
 // Union type for all manipulations
