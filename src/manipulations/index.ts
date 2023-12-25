@@ -73,16 +73,19 @@ export function applyManipulations(
 }
 
 // Function to apply manipulations
-export function doManipulation(	
+export function doManipulation(
 	input: string,
 	manipulation: TManipulation,
 ): string {
-	const result = doManipulationInner(input, manipulation)
+	const result = doManipulationInner(input, manipulation);
 
-	console.log(`${input.replaceAll("\n", "\\n")} -> ${JSON.stringify(manipulation)} => ${result}}`)
+	console.log(
+		`${input.replaceAll("\n", "\\n")} -> ${JSON.stringify(
+			manipulation,
+		)} => ${result}}`,
+	);
 
-	return result
-
+	return result;
 }
 
 function doManipulationInner(
@@ -92,7 +95,7 @@ function doManipulationInner(
 	try {
 		switch (manipulation.type) {
 			case "replace": {
-				if (manipulation.from === "") return input
+				if (manipulation.from === "") return input;
 
 				return input.replaceAll(
 					new RegExp(prepareInput(manipulation.from), "g"),
@@ -139,24 +142,31 @@ function doManipulationInner(
 							"d",
 							currentIndex.toString(),
 						);
-						return previousResult.replaceAll(placeholderWithIndex, currentValue);
+						return previousResult.replaceAll(
+							placeholderWithIndex,
+							currentValue,
+						);
 					},
 					manipulation.pattern,
 				);
 			}
 			case "splitJoin": {
-				return input.split(prepareInput(manipulation.splitString)).map(
-					(value, index, array) => {
+				return input
+					.split(prepareInput(manipulation.splitString))
+					.map((value, index, array) => {
 						return applyManipulations(value, manipulation.innerManipulations);
-					},
-				).join(prepareInput(manipulation.joinString));
+					})
+					.join(prepareInput(manipulation.joinString));
 			}
 		}
-	}
-	catch (exception) {
+	} catch (exception) {
 		if (exception instanceof Error) {
-			console.log(`Exception occured with manipulation ${JSON.stringify(manipulation)}: ${exception.toString()}`)
+			console.log(
+				`Exception occured with manipulation ${JSON.stringify(
+					manipulation,
+				)}: ${exception.toString()}`,
+			);
 		}
-		return input
+		return input;
 	}
 }
