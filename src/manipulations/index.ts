@@ -73,68 +73,90 @@ export function applyManipulations(
 }
 
 // Function to apply manipulations
-export function doManipulation(
+export function doManipulation(	
 	input: string,
 	manipulation: TManipulation,
 ): string {
-	switch (manipulation.type) {
-		case "replace": {
-			return input.replaceAll(
-				new RegExp(manipulation.from, "g"),
-				prepareInput(manipulation.to),
-			);
-		}
-		case "append": {
-			return input + prepareInput(manipulation.suffix);
-		}
-		case "prepend": {
-			return prepareInput(manipulation.prefix) + input;
-		}
-		case "splitGetFromIndex": {
-			if (manipulation.splitString.length === 0) return input;
-			const splittedInput = input.split(manipulation.splitString);
+	const result = doManipulationInner(input, manipulation)
 
-			if (splittedInput.length - 1 >= manipulation.index) {
-				return splittedInput[manipulation.index];
+	console.log(`${input.replaceAll("\n", "\\n")} -> ${JSON.stringify(manipulation)} => ${result}}`)
+
+	return result
+
+}
+
+function doManipulationInner(
+	input: string,
+	manipulation: TManipulation,
+): string {
+	try {
+		switch (manipulation.type) {
+			case "replace": {
+				if (manipulation.from === "") return input
+
+				return input.replaceAll(
+					new RegExp(prepareInput(manipulation.from), "g"),
+					prepareInput(manipulation.to),
+				);
 			}
-
-			return input;
-		}
-		case "compose": {
-			return prepareInput(manipulation.pattern).replaceAll(
-				manipulation.placeholder,
-				input,
-			);
-		}
-		case "slice": {
-			if (manipulation.end === null) {
-				return input.slice(manipulation.start);
+			case "append": {
+				return input + prepareInput(manipulation.suffix);
 			}
-			return input.slice(manipulation.start, manipulation.end);
-		}
-		case "splitCompose": {
-			if (manipulation.splitString.length === 0) return input;
-			const splittedInput = input.split(manipulation.splitString);
+			case "prepend": {
+				return prepareInput(manipulation.prefix) + input;
+			}
+			case "splitGetFromIndex": {
+				if (manipulation.splitString.length === 0) return input;
+				const splittedInput = input.split(manipulation.splitString);
 
-			if (splittedInput.length === 1) return input;
+				if (splittedInput.length - 1 >= manipulation.index) {
+					return splittedInput[manipulation.index];
+				}
 
-			return splittedInput.reduce(
-				(previousResult, currentValue, currentIndex, array) => {
-					const placeholderWithIndex = manipulation.placeholder.replaceAll(
-						"d",
-						currentIndex.toString(),
-					);
-					return previousResult.replaceAll(placeholderWithIndex, currentValue);
-				},
-				manipulation.pattern,
-			);
+				return input;
+			}
+			case "compose": {
+				return prepareInput(manipulation.pattern).replaceAll(
+					manipulation.placeholder,
+					input,
+				);
+			}
+			case "slice": {
+				if (manipulation.end === null) {
+					return input.slice(manipulation.start);
+				}
+				return input.slice(manipulation.start, manipulation.end);
+			}
+			case "splitCompose": {
+				if (manipulation.splitString.length === 0) return input;
+				const splittedInput = input.split(manipulation.splitString);
+
+				if (splittedInput.length === 1) return input;
+
+				return splittedInput.reduce(
+					(previousResult, currentValue, currentIndex, array) => {
+						const placeholderWithIndex = manipulation.placeholder.replaceAll(
+							"d",
+							currentIndex.toString(),
+						);
+						return previousResult.replaceAll(placeholderWithIndex, currentValue);
+					},
+					manipulation.pattern,
+				);
+			}
+			case "splitJoin": {
+				return input.split(prepareInput(manipulation.splitString)).map(
+					(value, index, array) => {
+						return applyManipulations(value, manipulation.innerManipulations);
+					},
+				).join(prepareInput(manipulation.joinString));
+			}
 		}
-		case "splitJoin": {
-			return input.split(prepareInput(manipulation.splitString)).map(
-				(value, index, array) => {
-					return applyManipulations(value, manipulation.innerManipulations);
-				},
-			).join(prepareInput(manipulation.joinString));
+	}
+	catch (exception) {
+		if (exception instanceof Error) {
+			console.log(`Exception occured with manipulation ${JSON.stringify(manipulation)}: ${exception.toString()}`)
 		}
+		return input
 	}
 }
