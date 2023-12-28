@@ -16,3 +16,5 @@ Manipulations:
 - [x] prepend
 - [x] compose
 - [x] slice ((`asdfg`, `2`, `4`) => `sdf`)
+
+colors https://coolors.co/221d23-fffcf9-d1603d-b1ede8-748b75

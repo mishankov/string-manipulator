@@ -1,7 +1,8 @@
 <script lang="ts">
-  import  { type TManipulation, doManipulation, applyManipulations } from "./manipulations";
+  import  { type TManipulation, applyManipulations } from "./manipulations";
   import ManipulationsPanel from "./ManipulationsPanel.svelte";
   
+  import TextArea from "./components/TextArea.svelte";
 
   let source = "Try me!\nPress \"Apply\""
   let result = ""
@@ -23,13 +24,11 @@
 
 <div class="panels">
   <div class="panel">
-    <label for="source">Source</label>
-    <textarea id="source" bind:value={source}/>
+    <TextArea id="source" labelText="Source" bind:value={source} />
   </div>
   
   <div class="panel">
-    <label for="result">Result</label>
-    <textarea id="result" bind:value={result}/>
+    <TextArea id="result" labelText="Result" bind:value={result} />
   </div>
 
   <div class="panel">
@@ -51,15 +50,5 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  textarea {
-    height: 500px;
-    width: 300px;
   }
 </style>
