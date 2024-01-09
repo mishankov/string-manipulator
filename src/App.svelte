@@ -11,13 +11,17 @@
     from: "\\n", to: "--"
   }]
 
-  
-
   function onApply(event: MouseEvent) {
     if (event.type == "click") {
       result = applyManipulations(source, manipulations)
     }
   }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.ctrlKey && event.key === "Enter") {
+      result = applyManipulations(source, manipulations)
+    }
+  })
 
   $: result = applyManipulations(source, manipulations)
 </script>
@@ -33,7 +37,7 @@
 
   <div class="panel">
     <ManipulationsPanel bind:manipulations />
-    <button on:click={onApply}>Apply</button>
+    <!-- <button on:click={onApply}>Apply</button> -->
   </div>
   
 </div>
