@@ -14,7 +14,7 @@
   export let { splitString, joinString, innerManipulations }: SplitJoinManipulation = {splitString: "", joinString: "", innerManipulations: [], type: "splitJoin"}
 </script>
 
-<div class="this">
+<div class="manipulation">
   <div class="header">
     <span>Split by</span> <input bind:value={splitString} />
   </div>
@@ -33,12 +33,15 @@
 </div>
 
 <style>
-  .this {
+  .manipulation {
+    --manipulation-bg-color: var(--splitJoin-bg-color);
+    --manipulation-border-color: var(--splitJoin-border-color);
+
     display: flex;
     flex-direction: column;
     gap: 10px;
 
-    border: 2px solid black;
+    /* border: 2px solid black; */
     padding: 5px;
   }
 

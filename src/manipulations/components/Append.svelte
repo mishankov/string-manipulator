@@ -9,6 +9,13 @@
   export let { suffix }: AppendManipulation = { suffix: "", type: "append"}
 </script>
 
-<div>
+<div class="manipulation">
   <span>Suffix </span><input bind:value={suffix} />
 </div>
+
+<style>
+  .manipulation {
+    --manipulation-bg-color: var(--append-bg-color);
+    --manipulation-border-color: var(--append-border-color);
+  }
+</style>

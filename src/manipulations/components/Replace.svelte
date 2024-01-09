@@ -10,6 +10,13 @@
   export let { from, to }: ReplaceManipulation = {from: "", to: "", type: "replace"}
 </script>
 
-<div>
+<div class="manipulation">
   <span>Replace from</span> <input bind:value={from} /> <span>to</span> <input bind:value={to} />
 </div>
+
+<style>
+  .manipulation {
+    --manipulation-bg-color: var(--replace-bg-color);
+    --manipulation-border-color: var(--replace-border-color);
+  }
+</style>

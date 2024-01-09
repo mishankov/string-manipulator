@@ -57,8 +57,8 @@
 <select on:change={onNewManipulationSelect}>
   <option value="add">Add</option>
   <option value="replace">Replace</option>
-  <option value="append">Append</option>
   <option value="prepend">Prepend</option>
+  <option value="append">Append</option>
   <option value="splitGetFromIndex">Split, get from index</option>
   <option value="compose">Compose</option>
   <option value="slice">Slice</option>

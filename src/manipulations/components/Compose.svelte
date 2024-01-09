@@ -10,6 +10,13 @@
   export let { pattern, placeholder }: ComposeManipulation = { pattern: "", placeholder: "{}", type: "compose"}
 </script>
 
-<div>
+<div class="manipulation">
   <span>Replace placeholder</span> <input bind:value={placeholder}> <span>in pattern</span> <textarea bind:value={pattern} />
 </div>
+
+<style>
+  .manipulation {
+    --manipulation-bg-color: var(--compose-bg-color);
+    --manipulation-border-color: var(--compose-border-color);
+  }
+</style>

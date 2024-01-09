@@ -4,6 +4,31 @@ html {
   --bg-color-110: hsl(290, 9%, 16%);
   --bg-color-120: hsl(290, 9%, 18%);
   --text-color: hsl(30, 100%, 99%);
+
+
+  --replace-bg-color: hsl(10, 52%, 53%);
+  --replace-border-color: hsl(10, 62%, 53%);
+
+  --prepend-bg-color: hsl(40, 52%, 53%);
+  --prepend-border-color: hsl(40, 52%, 53%);
+
+  --append-bg-color: hsl(70, 52%, 53%);
+  --append-border-color: hsl(70, 62%, 53%);
+
+  --splitGetFromIndex-bg-color: hsl(100, 52%, 53%);
+  --splitGetFromIndex-border-color: hsl(100, 62%, 53%);
+
+  --compose-bg-color: hsl(160, 52%, 53%);
+  --compose-border-color: hsl(160, 62%, 53%);
+
+  --slice-bg-color: hsl(190, 52%, 53%);
+  --slice-border-color: hsl(190, 62%, 53%);
+
+  --splitCompose-bg-color: hsl(220, 52%, 53%);
+  --splitCompose-border-color: hsl(220, 62%, 53%);
+
+  --splitJoin-bg-color: hsl(250, 52%, 53%);
+  --splitJoin-border-color: hsl(250, 62%, 53%);
 }
 
 body {

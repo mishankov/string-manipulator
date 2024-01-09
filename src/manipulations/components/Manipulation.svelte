@@ -24,3 +24,16 @@
     <SplitJoin bind:splitString={manipulation.splitString} bind:joinString={manipulation.joinString} bind:innerManipulations={manipulation.innerManipulations}/>
   {/if}
 </div>
+
+<style>
+  :global(.manipulation) {
+    /* default colors */
+    --manipulation-bg-color: grey;
+    --manipulation-border-color: white;
+
+    padding: 10px;
+    background-color: var(--manipulation-bg-color);
+    border: 2px solid var(--manipulation-border-color);
+    border-radius: 10px;
+  }
+</style>
