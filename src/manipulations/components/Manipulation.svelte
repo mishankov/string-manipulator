@@ -23,6 +23,7 @@
   {:else if manipulation.type == "splitJoin"}
     <SplitJoin bind:splitString={manipulation.splitString} bind:joinString={manipulation.joinString} bind:innerManipulations={manipulation.innerManipulations}/>
   {/if}
+  <button>x</button>
 </div>
 
 <style>
@@ -35,5 +36,12 @@
     background-color: var(--manipulation-bg-color);
     border: 2px solid var(--manipulation-border-color);
     border-radius: 10px;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
   }
 </style>
