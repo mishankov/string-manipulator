@@ -3,47 +3,51 @@
 
   export let manipulations: TManipulation[] = []
 
+  function randomId() {
+    return (Math.random() + 1).toString(36).substring(2);
+  }
+
   function onNewManipulationSelect(event: Event) {
     const target = event.target as HTMLSelectElement
     switch (target.value) {
       case "replace": 
         manipulations.push({
-          type: "replace", from: "", to: ""
+          type: "replace", from: "", to: "", id: randomId()
         })
         break
       case "append": 
         manipulations.push({
-          type: "append", suffix: ""
+          type: "append", suffix: "", id: randomId()
         })
         break
       case "prepend": 
         manipulations.push({
-          type: "prepend", prefix: ""
+          type: "prepend", prefix: "", id: randomId()
         })
         break
       case "splitGetFromIndex":
         manipulations.push({
-          type: "splitGetFromIndex", splitString: "", index: 0
+          type: "splitGetFromIndex", splitString: "", index: 0, id: randomId()
         })
         break
       case "compose":
         manipulations.push({
-          type: "compose", pattern: "{}", placeholder: "{}"
+          type: "compose", pattern: "{}", placeholder: "{}", id: randomId()
         })
         break
       case "slice":
         manipulations.push({
-          type: "slice", start: 0, end: -1
+          type: "slice", start: 0, end: -1, id: randomId()
         })
         break
       case "splitCompose":
         manipulations.push({
-          type: "splitCompose", splitString: "!", placeholder: "{d}", pattern: "{1}, {0}"
+          type: "splitCompose", splitString: "!", placeholder: "{d}", pattern: "{1}, {0}", id: randomId()
         })
         break
       case "splitJoin":
         manipulations.push({
-          type: "splitJoin", splitString: ",", joinString: "!", innerManipulations: []
+          type: "splitJoin", splitString: ",", joinString: "!", innerManipulations: [], id: randomId()
         })
         break
     }

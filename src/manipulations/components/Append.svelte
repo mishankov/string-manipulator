@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
-  export interface AppendManipulation {
+  import type { ManipulationBase } from "..";
+
+  export interface AppendManipulation extends ManipulationBase {
     type: "append"
     suffix: string
   }

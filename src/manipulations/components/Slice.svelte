@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
-  export interface SliceManipulation {
+  import type { ManipulationBase } from "..";
+
+  export interface SliceManipulation extends ManipulationBase {
     type: "slice"
     start: number
     end: number

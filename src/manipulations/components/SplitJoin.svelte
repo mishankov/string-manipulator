@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
-  import { type InnerSplitJoinManipulation } from ".."
+  import type { InnerSplitJoinManipulation, ManipulationBase } from ".."
   import { Manipulation, AddManipulation } from ".."
 
-  export interface SplitJoinManipulation {
+  export interface SplitJoinManipulation extends ManipulationBase {
     type: "splitJoin"
     splitString: string
     joinString: string

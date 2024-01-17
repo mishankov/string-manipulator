@@ -30,6 +30,10 @@ export {
 	AddManipulation,
 };
 
+export interface ManipulationBase {
+	id?: string
+}
+
 // Union type for all manipulations
 export type TManipulation =
 	| AppendManipulation

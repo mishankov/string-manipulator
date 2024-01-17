@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
-  export interface ComposeManipulation {
+  import type { ManipulationBase } from "..";
+  
+  export interface ComposeManipulation extends ManipulationBase {
     type: "compose"
     pattern: string
     placeholder: string

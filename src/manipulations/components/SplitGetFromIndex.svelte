@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
-  export interface SplitGetFromIndexManipulation {
+  import type { ManipulationBase } from "..";
+
+  export interface SplitGetFromIndexManipulation extends ManipulationBase {
     type: "splitGetFromIndex"
     splitString: string
     index: number

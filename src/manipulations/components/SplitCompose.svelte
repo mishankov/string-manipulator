@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
-  export interface SplitComposeManipulation {
+  import type { ManipulationBase } from "..";
+
+  export interface SplitComposeManipulation extends ManipulationBase {
     type: "splitCompose"
     splitString: string
     placeholder: string

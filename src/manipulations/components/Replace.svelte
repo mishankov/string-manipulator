@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
-  export interface ReplaceManipulation {
+  import type { ManipulationBase } from "..";
+
+  export interface ReplaceManipulation extends ManipulationBase {
     type: "replace"
     from: string
     to: string

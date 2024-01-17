@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
-  export interface PrependManipulation {
+  import type { ManipulationBase } from "..";
+
+  export interface PrependManipulation extends ManipulationBase {
     type: "prepend"
     prefix: string
   }
