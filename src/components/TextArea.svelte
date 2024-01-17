@@ -2,13 +2,14 @@
   export let value = ""
   export let id = "ta"
   export let labelText = ""
+  export let spellcheck = false
 </script>
 
 {#if labelText !== ""}
   <label for="{id}">Source</label>
 {/if}
 
-<textarea id="{id}" bind:value={value}/>
+<textarea id="{id}" bind:value={value} {spellcheck}/>
 
 <style>
   textarea {
