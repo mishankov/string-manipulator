@@ -31,7 +31,7 @@ export {
 };
 
 export interface ManipulationBase {
-	id?: string
+	id?: string;
 }
 
 // Union type for all manipulations
