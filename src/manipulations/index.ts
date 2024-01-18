@@ -15,6 +15,7 @@ import SplitJoin, {
 
 import AddManipulation from "./components/AddManipulation.svelte";
 import Manipulation from "./components/Manipulation.svelte";
+import ManipulationsList from "./components/ManipulationsList.svelte";
 
 // Re-export components
 export {
@@ -28,6 +29,7 @@ export {
 	SplitJoin,
 	Manipulation,
 	AddManipulation,
+	ManipulationsList
 };
 
 export interface ManipulationBase {
