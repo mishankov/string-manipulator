@@ -29,7 +29,7 @@ export {
 	SplitJoin,
 	Manipulation,
 	AddManipulation,
-	ManipulationsList
+	ManipulationsList,
 };
 
 export interface ManipulationBase {
