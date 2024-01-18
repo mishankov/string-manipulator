@@ -8,7 +8,7 @@
   let result = ""
   let manipulations: TManipulation[] = [{
     type: "replace",
-    from: "\\n", to: "--"
+    from: "\\n", to: "--", id: "initial"
   }]
 
   function onApply(event: MouseEvent) {

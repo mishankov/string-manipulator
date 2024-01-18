@@ -12,6 +12,12 @@
 
 <script lang="ts">
   export let { splitString, joinString, innerManipulations }: SplitJoinManipulation = {splitString: "", joinString: "", innerManipulations: [], type: "splitJoin"}
+
+  function handleManipulationDelete(event: CustomEvent) {
+    innerManipulations = innerManipulations.filter((manipulation) => {
+      return manipulation.id !== event.detail.id
+    })
+  }
 </script>
 
 <div class="manipulation">
@@ -21,7 +27,7 @@
 
   <div class="inner-manipulations">
     {#each innerManipulations as manipulation}
-      <Manipulation bind:manipulation={manipulation} /> 
+      <Manipulation bind:manipulation={manipulation} on:delete={handleManipulationDelete}/> 
     {/each}
     <AddManipulation bind:manipulations={innerManipulations} />
   </div>

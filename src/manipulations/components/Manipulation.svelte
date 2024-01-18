@@ -1,8 +1,19 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
   import { type TManipulation } from "..";
   import { Replace, Append, Prepend, SplitGetFromIndex, Compose, Slice, SplitCompose, SplitJoin } from "..";
 
   export let manipulation: TManipulation
+
+  const dispatch = createEventDispatcher()
+
+  function sendDeleteEvent() {
+    console.log(`Sendind delete event for ${manipulation.id}`)
+    dispatch("delete", {
+      id: manipulation.id
+    })
+  }
 </script>
 
 <div>
@@ -23,7 +34,7 @@
   {:else if manipulation.type == "splitJoin"}
     <SplitJoin bind:splitString={manipulation.splitString} bind:joinString={manipulation.joinString} bind:innerManipulations={manipulation.innerManipulations}/>
   {/if}
-  <button>x</button>
+  <button on:click={sendDeleteEvent}>x</button>
 </div>
 
 <style>
