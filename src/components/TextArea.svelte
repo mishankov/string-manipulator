@@ -6,7 +6,7 @@
 </script>
 
 {#if labelText !== ""}
-  <label for="{id}">Source</label>
+  <label for="{id}">{labelText}</label>
 {/if}
 
 <textarea id="{id}" bind:value={value} {spellcheck}/>
