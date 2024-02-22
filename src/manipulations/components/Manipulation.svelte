@@ -9,7 +9,6 @@
   const dispatch = createEventDispatcher()
 
   function sendDeleteEvent() {
-    console.log(`Sendind delete event for ${manipulation.id}`)
     dispatch("delete", {
       id: manipulation.id
     })

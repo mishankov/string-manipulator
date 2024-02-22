@@ -9,7 +9,6 @@
       return manipulation.id !== event.detail.id
     })
   }
-  // $: console.log(manipulations)
 </script>
 
 <div id="manipulations" class="manipulations">
