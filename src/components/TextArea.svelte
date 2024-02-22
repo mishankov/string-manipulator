@@ -15,15 +15,15 @@
   textarea {
     height: 500px;
     width: 300px;
-    background-color: var(--bg-color-110);
+    /* background-color: #FFF; */
     color: var(--text-color);
     border-radius: 10px;
-    border: 1px solid var(--bg-color-90);
+    border: 1px solid var(--border-color-100);
     padding: 10px;
   }
 
   textarea:focus {
     outline: none;
-    background-color: var(--bg-color-120);
+    /* background-color: var(--bg-color-120); */
   }
 </style>

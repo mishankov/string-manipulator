@@ -32,9 +32,6 @@
 
 <style>
   .manipulation {
-    --manipulation-bg-color: var(--splitJoin-bg-color);
-    --manipulation-border-color: var(--splitJoin-border-color);
-
     display: flex;
     flex-direction: column;
     gap: 10px;
