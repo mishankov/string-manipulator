@@ -34,7 +34,7 @@
   {:else if manipulation.type == "splitJoin"}
     <SplitJoin bind:splitString={manipulation.splitString} bind:joinString={manipulation.joinString} bind:innerManipulations={manipulation.innerManipulations}/>
   {/if}
-  <button class="delete" on:click={sendDeleteEvent}>X</button>
+  <button class="delete" on:click={sendDeleteEvent}><img src="trash-can.svg" alt="Delete"/></button>
 </div>
 
 <style>
@@ -70,5 +70,10 @@
   .delete:active {
     outline: none;
     background-color: var(--bg-color-100);
+  }
+
+  .delete img {
+    min-width: 20px;
+    height: 20px;
   }
 </style>
