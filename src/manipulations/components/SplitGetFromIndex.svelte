@@ -12,13 +12,6 @@
   export let { splitString, index }: SplitGetFromIndexManipulation = {splitString: "", index: 0, type: "splitGetFromIndex"}
 </script>
 
-<div class="manipulation">
+<div>
   <span>Split by </span><input bind:value={splitString} /><span>, get from </span><input bind:value={index} />
 </div>
-
-<style>
-  .manipulation {
-    --manipulation-bg-color: var(--splitGetFromIndex-bg-color);
-    --manipulation-border-color: var(--splitGetFromIndex-border-color);
-  }
-</style>

@@ -34,7 +34,7 @@
   {:else if manipulation.type == "splitJoin"}
     <SplitJoin bind:splitString={manipulation.splitString} bind:joinString={manipulation.joinString} bind:innerManipulations={manipulation.innerManipulations}/>
   {/if}
-  <button class="delete" on:click={sendDeleteEvent}>x</button>
+  <button class="delete" on:click={sendDeleteEvent}>X</button>
 </div>
 
 <style>
@@ -43,10 +43,7 @@
     --manipulation-bg-color: grey;
     --manipulation-border-color: white;
 
-    padding: 10px;
-    background-color: var(--manipulation-bg-color);
-    border: 2px solid var(--manipulation-border-color);
-    border-radius: 10px;
+    
   }
 
   div {
@@ -54,22 +51,30 @@
     flex-direction: row;
     gap: 10px;
     align-items: center;
+
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid var(--border-color-100);
+    border-radius: 10px;
   }
 
   .delete {
-    background-color: var(--bg-color-100);
+    background-color: #fff;
     color: var(--text-color);
     border: none;
     border-radius: 10px;
+    padding: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .delete:hover {
     outline: none;
-    background-color: var(--bg-color-110);
+    border: 2px solid var(--border-color-100);
   }
 
   .delete:active {
     outline: none;
-    background-color: var(--bg-color-120);
+    background-color: var(--bg-color-100);
   }
 </style>
