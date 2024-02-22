@@ -9,7 +9,6 @@
   const dispatch = createEventDispatcher()
 
   function sendDeleteEvent() {
-    console.log(`Sendind delete event for ${manipulation.id}`)
     dispatch("delete", {
       id: manipulation.id
     })
@@ -34,18 +33,10 @@
   {:else if manipulation.type == "splitJoin"}
     <SplitJoin bind:splitString={manipulation.splitString} bind:joinString={manipulation.joinString} bind:innerManipulations={manipulation.innerManipulations}/>
   {/if}
-  <button class="delete" on:click={sendDeleteEvent}>X</button>
+  <button class="delete" on:click={sendDeleteEvent}><img src="trash-can.svg" alt="Delete"/></button>
 </div>
 
 <style>
-  :global(.manipulation) {
-    /* default colors */
-    --manipulation-bg-color: grey;
-    --manipulation-border-color: white;
-
-    
-  }
-
   div {
     display: flex;
     flex-direction: row;
@@ -66,6 +57,8 @@
     padding: 0px;
     padding-left: 5px;
     padding-right: 5px;
+
+    margin-left: auto;
   }
 
   .delete:hover {
@@ -76,5 +69,10 @@
   .delete:active {
     outline: none;
     background-color: var(--bg-color-100);
+  }
+
+  .delete img {
+    min-width: 20px;
+    height: 20px;
   }
 </style>

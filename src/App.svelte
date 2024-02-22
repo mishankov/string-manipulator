@@ -3,19 +3,14 @@
   import ManipulationsPanel from "./ManipulationsPanel.svelte";
   
   import TextArea from "./components/TextArea.svelte";
+  import Heading from "./components/Heading.svelte";
 
-  let source = "Try me!\nPress \"Apply\""
+  let source = "Try me!\nResult will update automatically"
   let result = ""
   let manipulations: TManipulation[] = [{
     type: "replace",
-    from: "\\n", to: "--", id: "initial"
+    from: "\\n", to: " -- ", id: "initial"
   }]
-
-  function onApply(event: MouseEvent) {
-    if (event.type == "click") {
-      result = applyManipulations(source, manipulations)
-    }
-  }
 
   document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && event.key === "Enter") {
@@ -28,26 +23,29 @@
 
 <div class="panels">
   <div class="panel">
-    <TextArea id="source" labelText="Source" bind:value={source} />
-  </div>
-  
-  <div class="panel">
-    <TextArea id="result" labelText="Result" bind:value={result} />
+    <Heading text="Source" />
+    <TextArea id="source" bind:value={source} />
   </div>
 
   <div class="panel">
+    <Heading text="Manipulations" />
     <ManipulationsPanel bind:manipulations />
-    <!-- <button on:click={onApply}>Apply</button> -->
   </div>
-  
+
+  <div class="panel">
+    <Heading text="Result" />
+    <TextArea id="result" bind:value={result} />
+  </div>
 </div>
 
 
 <style>
   .panels {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
+
+    padding: 10px;
   }
 
   .panel {
