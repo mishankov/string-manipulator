@@ -13,13 +13,13 @@
 
 <style>
   textarea {
-    height: 500px;
-    width: 300px;
-    /* background-color: #FFF; */
+    width: 100%;
     color: var(--text-color);
     border-radius: 10px;
-    border: 1px solid var(--border-color-100);
+    border: 2px solid var(--border-color-100);
     padding: 10px;
+
+    font-family: monospace;
   }
 
   textarea:focus {

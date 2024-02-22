@@ -38,14 +38,6 @@
 </div>
 
 <style>
-  :global(.manipulation) {
-    /* default colors */
-    --manipulation-bg-color: grey;
-    --manipulation-border-color: white;
-
-    
-  }
-
   div {
     display: flex;
     flex-direction: row;
@@ -66,6 +58,8 @@
     padding: 0px;
     padding-left: 5px;
     padding-right: 5px;
+
+    margin-left: auto;
   }
 
   .delete:hover {
