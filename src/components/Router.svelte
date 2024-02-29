@@ -1,15 +1,48 @@
 <script lang="ts" context="module">
-    import type { ComponentType } from "svelte";
+    import { onMount, type ComponentType } from "svelte";
+    import { get, writable } from "svelte/store";
 
-    export interface IRouter {
+    import urlStore from "./url-store";
+
+    export interface Route {
         location: string
         component: ComponentType
     }
+
+    export const routes = writable<Route[]>();
+    export const currentRoute = writable<Route>();
+
+    function currentLocation(pathname: string) {
+      if (pathname === "/") return pathname;
+      if (pathname.endsWith("/")) return pathname.slice(0, pathname.length - 1);
+      return pathname;
+    };
+
+    function getRoute(href: string, routes: Route[]): Route {
+        const url = new URL(href);
+        const route = routes.find(route => route.location === currentLocation(url.pathname)) || routes[0]
+        return route
+    }
+
+    export function navigate(event: MouseEvent) {
+        event.preventDefault();
+        const target = event.target as HTMLAnchorElement
+        window.history.pushState('', '', target["href"]);
+        const route = getRoute(target["href"], get(routes));
+        currentRoute.set(route);
+    };
 </script>
 
 <script lang="ts">
-    export let routes: IRouter[];
-    export let defaultComponent: ComponentType;
+    onMount(() => {
+        console.log(routes)
+        currentRoute.set(getRoute($urlStore.href, $routes));
+    });
+
+    $: currentRoute.set(getRoute($urlStore.href, $routes))
 </script>
 
-<svelte:component this={(routes.find(route => route.location === location.pathname) || {component: defaultComponent}).component}/>
+{#if $currentRoute}
+    <svelte:component this={$currentRoute.component}/>
+{/if}
+

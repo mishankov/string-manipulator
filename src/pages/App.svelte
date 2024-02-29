@@ -30,7 +30,7 @@
 
 <div class="panel">
     <div class="header-with-link">
-        <Heading text="Manipulations" /> <Link link="/docs">Docs</Link>
+        <Heading text="Manipulations" /> <Link link="/docs" isNavigation>Docs</Link>
     </div>
     <ManipulationsPanel bind:manipulations />
 </div>
