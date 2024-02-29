@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { TManipulation } from "./manipulations";
-  import { ManipulationsList } from "./manipulations";
+  import type { TManipulation } from "../../manipulations";
+  import { ManipulationsList } from "../../manipulations";
 
   export let manipulations: TManipulation[] = []
 </script>

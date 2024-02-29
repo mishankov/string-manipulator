@@ -1,10 +1,10 @@
 <script lang="ts">
-    import  { type TManipulation, applyManipulations } from "../manipulations";
-    import ManipulationsPanel from "../ManipulationsPanel.svelte";
+    import  { type TManipulation, applyManipulations } from "../../manipulations";
+    import ManipulationsPanel from "./ManipulationsPanel.svelte";
 
-    import TextArea from "../components/TextArea.svelte";
-    import Heading from "../components/Heading.svelte";
-    import Link from "../components/Link.svelte";
+    import TextArea from "../../components/TextArea.svelte";
+    import Heading from "../../components/Heading.svelte";
+    import Link from "../../components/Link.svelte";
 
     let source = "Try me!\nResult will update automatically"
     let result = ""
