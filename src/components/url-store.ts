@@ -10,13 +10,13 @@ export function createUrlStore() {
 
 	const updateHref = () => href.set(window.location.href);
 
-	history.pushState = (state, unused, url) => {
-		originalPushState(state, unused, url);
-		updateHref();
-	};
+	history.pushState = function (data, unused, url) {
+    originalPushState.apply(this, [data, unused, url]);
+    updateHref()
+  }
 
-	history.replaceState = (state, unused, url) => {
-		originalReplaceState(state, unused, url);
+	history.replaceState = function (data, unused, url)  {
+		originalReplaceState.apply(this, [data, unused, url]);
 		updateHref();
 	};
 
