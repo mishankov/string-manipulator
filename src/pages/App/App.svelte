@@ -6,7 +6,7 @@
     import Heading from "../../components/Heading.svelte";
     import Link from "../../components/Link.svelte";
 
-    let source = "Try me!\nResult will update automatically"
+    let source = "Try me!\nResult will be updated automatically"
     let result = ""
     let manipulations: TManipulation[] = [{
         type: "replace",
@@ -45,7 +45,7 @@
 <style>
     .panels {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr auto 1fr;
         gap: 10px;
 
         padding: 10px;
