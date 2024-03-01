@@ -12,15 +12,21 @@
     export const routes = writable<Route[]>();
     export const currentRoute = writable<Route>();
 
+    function pathWithBase(path: string): string {
+        if (import.meta.env.BASE_URL === "/") return path
+        return import.meta.env.BASE_URL + path
+    }
+
     function currentLocation(pathname: string) {
-      if (pathname === "/") return pathname;
+      if (pathname === pathWithBase("/")) return pathname;
       if (pathname.endsWith("/")) return pathname.slice(0, pathname.length - 1);
+      
       return pathname;
     };
 
     function getRoute(href: string, routes: Route[]): Route {
         const url = new URL(href);
-        const route = routes.find(route => route.location === currentLocation(url.pathname)) || routes[0]
+        const route = routes.find(route => pathWithBase(route.location) === currentLocation(url.pathname)) || routes[0]
         return route
     }
 
