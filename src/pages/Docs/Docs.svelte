@@ -15,49 +15,49 @@
             name: "Replace",
             description: "Replaces all occurencies of a string in input",
             source: "I am your possible source",
-            manipulation: {type: "replace", from: "source", to: "output"}
+            manipulation: {id: "Replace", type: "replace", from: "source", to: "output"}
         }, 
         {
             name: "Prepend",
             description: "Add a string before input",
             source: "Source",
-            manipulation: {type: "prepend", prefix: "Best "}
+            manipulation: {id: "Prepend", type: "prepend", prefix: "Best "}
         }, 
         {
             name: "Append",
             description: "Add a string after input",
             source: "Source",
-            manipulation: {type: "append", suffix: " -> output"}
+            manipulation: {id: "Append", type: "append", suffix: " -> output"}
         },
         {
             name: "Split, get from index",
             description: "Split input by string and get substring by index",
             source: "Zero, one, two, three",
-            manipulation: {type: "splitGetFromIndex", splitString: ",", index: 1}
+            manipulation: {id: "splitGetFromIndex", type: "splitGetFromIndex", splitString: ",", index: 1}
         },
         {
             name: "Compose",
             description: "Compose string using input string by pattern",
             source: "Input",
-            manipulation: {type: "compose", placeholder: "{}", pattern: "{}: {}, {}"}
+            manipulation: {id: "compose", type: "compose", placeholder: "{}", pattern: "{}: {}, {}"}
         },
         {
             name: "Slice",
             description: "Get a slice from input string",
             source: "Some good input",
-            manipulation: {type: "slice", start: 5, end: 9}
+            manipulation: {id: "slice", type: "slice", start: 5, end: 9}
         },
         {
             name: "Split-compose",
             description: "Split input by delimeter and compose string by pattern",
             source: "Zero, one, two, three",
-            manipulation: {type: "splitCompose", splitString: ", ", placeholder: "{d}", pattern: "Reordered {1}, {0}, {2}!"}
+            manipulation: {id: "splitCompose", type: "splitCompose", splitString: ", ", placeholder: "{d}", pattern: "Reordered {1}, {0}, {2}!"}
         },
         {
             name: "Split-join",
             description: "Split input by delimeter, apply manipulations and join",
             source: "Zero, one, two, three",
-            manipulation: {type: "splitJoin", splitString: ", ", joinString: "\\n", innerManipulations: [{type: "prepend", prefix: "Number: "}]}
+            manipulation: {id: "splitJoin", type: "splitJoin", splitString: ", ", joinString: "\\n", innerManipulations: [{id: "splitJoinprepend", type: "prepend", prefix: "Number: "}, {id: "splitJoinappend", type: "append", suffix: "!"}]}
         }
     ]
 
@@ -69,7 +69,7 @@
         <Link link="/" isNavigation>Go to app</Link>
     </div>
 
-    {#each manipulationsDocs as doc}
+    {#each manipulationsDocs as doc (doc.name)}
         <div class="docs-row"><h2>{doc.name}</h2></div>
         <div class="docs-row">
             <p>{doc.description}</p>
