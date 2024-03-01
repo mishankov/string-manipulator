@@ -1,6 +1,36 @@
 <script lang="ts">
+    import { type TManipulation } from "../../manipulations";
     import Link from "../../components/Link.svelte";
     import ManipulationBlock from "./ManipulationBlock.svelte";
+
+    interface ManipulationDoc {
+        name: string,
+        description: string,
+        source: string,
+        manipulation: TManipulation
+    }
+    
+    const manipulationsDocs: ManipulationDoc[] = [
+        {
+            name: "Replace",
+            description: "Replaces all occurencies of a string in another string",
+            source: "I am your possible source",
+            manipulation: {type: "replace", from: "source", to: "output"}
+        }, 
+        {
+            name: "Prepend",
+            description: "Add a string before given string",
+            source: "Source",
+            manipulation: {type: "prepend", prefix: "Best "}
+        }, 
+        {
+            name: "Append",
+            description: "Add a string after given string",
+            source: "Source",
+            manipulation: {type: "append", suffix: " -> output"}
+        }
+    ]
+
 </script>
 
 <div class="container">
@@ -9,14 +39,16 @@
         <Link link="/" isNavigation>Go to app</Link>
     </div>
 
-    <div class="docs-row"><h2>Replace</h2></div>
-    <div class="docs-row">
-        <p>Replaces all occurencies of a string in another string</p>
-    </div>
+    {#each manipulationsDocs as doc}
+        <div class="docs-row"><h2>{doc.name}</h2></div>
+        <div class="docs-row">
+            <p>{doc.description}</p>
+        </div>
 
-    <div class="docs-row">
-        <ManipulationBlock source="kek" manipulation={{type: "replace", from: "k", to: "l"}}/>
-    </div>
+        <div class="docs-row">
+            <ManipulationBlock source={doc.source} manipulation={doc.manipulation}/>
+        </div>
+    {/each}
     
 </div>
 
