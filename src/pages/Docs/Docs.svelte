@@ -13,21 +13,51 @@
     const manipulationsDocs: ManipulationDoc[] = [
         {
             name: "Replace",
-            description: "Replaces all occurencies of a string in another string",
+            description: "Replaces all occurencies of a string in input",
             source: "I am your possible source",
             manipulation: {type: "replace", from: "source", to: "output"}
         }, 
         {
             name: "Prepend",
-            description: "Add a string before given string",
+            description: "Add a string before input",
             source: "Source",
             manipulation: {type: "prepend", prefix: "Best "}
         }, 
         {
             name: "Append",
-            description: "Add a string after given string",
+            description: "Add a string after input",
             source: "Source",
             manipulation: {type: "append", suffix: " -> output"}
+        },
+        {
+            name: "Split, get from index",
+            description: "Split input by string and get substring by index",
+            source: "Zero, one, two, three",
+            manipulation: {type: "splitGetFromIndex", splitString: ",", index: 1}
+        },
+        {
+            name: "Compose",
+            description: "Compose string using input string by pattern",
+            source: "Input",
+            manipulation: {type: "compose", placeholder: "{}", pattern: "{}: {}, {}"}
+        },
+        {
+            name: "Slice",
+            description: "Get a slice from input string",
+            source: "Some good input",
+            manipulation: {type: "slice", start: 5, end: 9}
+        },
+        {
+            name: "Split-compose",
+            description: "Split input by delimeter and compose string by pattern",
+            source: "Zero, one, two, three",
+            manipulation: {type: "splitCompose", splitString: ", ", placeholder: "{d}", pattern: "Reordered {1}, {0}, {2}!"}
+        },
+        {
+            name: "Split-join",
+            description: "Split input by delimeter, apply manipulations and join",
+            source: "Zero, one, two, three",
+            manipulation: {type: "splitJoin", splitString: ", ", joinString: "\\n", innerManipulations: [{type: "prepend", prefix: "Number: "}]}
         }
     ]
 
@@ -60,6 +90,7 @@
         gap: 10px;
 
         padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     .docs-row {
