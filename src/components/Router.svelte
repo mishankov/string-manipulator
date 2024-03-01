@@ -41,7 +41,6 @@
 
 <script lang="ts">
     onMount(() => {
-        console.log(routes)
         currentRoute.set(getRoute($urlStore.href, $routes));
     });
 
