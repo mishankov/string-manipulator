@@ -14,3 +14,11 @@
 <div>
   <span>Suffix </span><input bind:value={suffix} />
 </div>
+
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+</style>
