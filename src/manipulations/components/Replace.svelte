@@ -15,3 +15,12 @@
 <div>
   <span>Replace from</span> <input bind:value={from} /> <span>to</span> <input bind:value={to} />
 </div>
+
+
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+</style>

@@ -13,5 +13,13 @@
 </script>
 
 <div>
-  <span>Split by </span><input bind:value={splitString} /><span>, get from </span><input bind:value={index} />
+  <span>Split by </span><input bind:value={splitString} /><span>get from </span><input bind:value={index} />
 </div>
+
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+</style>

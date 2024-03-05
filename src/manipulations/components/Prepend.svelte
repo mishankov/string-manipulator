@@ -15,3 +15,11 @@
   <span>Prefix </span><input bind:value={prefix} />
 </div>
 
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+</style>
+

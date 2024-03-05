@@ -14,5 +14,13 @@
 </script>
 
 <div>
-  <span>Split by</span> <input bind:value={splitString}/> <span> and replace placeholder</span> <input bind:value={placeholder} /> <span>in pattern</span> <textarea bind:value={pattern} />
+  <span>Split by</span> <input bind:value={splitString}/> <span>and replace placeholder</span> <input bind:value={placeholder} /> <span>in pattern</span> <textarea bind:value={pattern} />
 </div>
+
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+</style>
