@@ -52,7 +52,7 @@ function prepareInput(input: string): string {
 		['\\\\t', '\t']
 	];
 
-	const preparedInput = stuffToReplace.reduce((previousResult, currentValue, index, array) => {
+	const preparedInput = stuffToReplace.reduce((previousResult, currentValue) => {
 		return previousResult.replaceAll(new RegExp(currentValue[0], 'g'), currentValue[1]);
 	}, input);
 
@@ -116,7 +116,7 @@ function doManipulationInner(input: string, manipulation: TManipulation): string
 
 				if (splittedInput.length === 1) return input;
 
-				return splittedInput.reduce((previousResult, currentValue, currentIndex, array) => {
+				return splittedInput.reduce((previousResult, currentValue, currentIndex) => {
 					const placeholderWithIndex = manipulation.placeholder.replaceAll(
 						'd',
 						currentIndex.toString()
@@ -127,7 +127,7 @@ function doManipulationInner(input: string, manipulation: TManipulation): string
 			case 'splitJoin': {
 				return input
 					.split(prepareInput(manipulation.splitString))
-					.map((value, index, array) => {
+					.map((value) => {
 						return applyManipulations(value, manipulation.innerManipulations);
 					})
 					.join(prepareInput(manipulation.joinString));

@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest';
-import { doManipulation, type TManipulation } from '$lib/manipulations';
+import { doManipulation } from '$lib/manipulations';
 
 it('Test replace manipulation', () => {
 	expect(doManipulation('\\3', { type: 'replace', from: '\\\\3', to: 'result' })).eq('result');
