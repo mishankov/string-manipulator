@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	export let link: string;
 </script>
 
-<a href={link}><slot /></a>
+<a href="{base}/{link}"><slot /></a>
 
 <style>
 	a {
