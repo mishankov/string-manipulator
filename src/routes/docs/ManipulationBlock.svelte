@@ -1,8 +1,8 @@
 <script lang="ts">
-    import TextArea from "../../components/TextArea.svelte";
-    import Manipulation from "../../manipulations/components/Manipulation.svelte";
+    import TextArea from "$lib/components/TextArea.svelte";
+    import Manipulation from "$lib/manipulations/components/Manipulation.svelte";
 
-    import { type TManipulation, applyManipulations } from "../../manipulations";
+    import { type TManipulation, applyManipulations } from "$lib/manipulations";
 
     export let manipulation: TManipulation
     export let source: string

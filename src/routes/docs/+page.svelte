@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { type TManipulation } from "../../manipulations";
-    import Link from "../../components/Link.svelte";
+    import { type TManipulation } from "$lib/manipulations";
+    import Link from "$lib/components/Link.svelte";
     import ManipulationBlock from "./ManipulationBlock.svelte";
 
     interface ManipulationDoc {
@@ -66,7 +66,7 @@
 <div class="container">
     <div class="docs-row">
         <h1>Docs</h1>
-        <Link link="/" isNavigation>Go to app</Link>
+        <Link link="/">Go to app</Link>
     </div>
 
     {#each manipulationsDocs as doc (doc.name)}
