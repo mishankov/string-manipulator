@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { expect, it } from "vitest";
+import { doManipulation, type TManipulation } from "$lib/manipulations";
 
-describe('sum test', () => {
-	it('adds 1 + 2 to equal 3', () => {
-		expect(1 + 2).toBe(3);
-	});
-});
+
+it("Test replace manipulation", () => {
+  expect(doManipulation("\\3", {type: "replace", from: "\\\\3", to: "result"})).eq("result")
+  expect(doManipulation("\\", {type: "replace", from: "\\\\", to: "result"})).eq("result")
+})
