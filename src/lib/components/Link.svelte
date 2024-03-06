@@ -3,7 +3,7 @@
 	export let link: string;
 </script>
 
-<a href="{base}/{link}"><slot /></a>
+<a href="{base}{link}"><slot /></a>
 
 <style>
 	a {
