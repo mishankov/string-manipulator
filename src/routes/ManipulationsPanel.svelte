@@ -1,19 +1,18 @@
 <script lang="ts">
-  import type { TManipulation } from "$lib/manipulations";
-  import { ManipulationsList } from "$lib/manipulations";
+	import type { TManipulation } from '$lib/manipulations';
+	import { ManipulationsList } from '$lib/manipulations';
 
-  export let manipulations: TManipulation[] = []
+	export let manipulations: TManipulation[] = [];
 </script>
 
 <div class="panel">
-  <ManipulationsList bind:manipulations/>
+	<ManipulationsList bind:manipulations />
 </div>
 
-
 <style>
-  .panel {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+	.panel {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
 </style>

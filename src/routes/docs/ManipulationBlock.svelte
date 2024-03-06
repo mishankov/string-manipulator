@@ -1,28 +1,27 @@
 <script lang="ts">
-    import TextArea from "$lib/components/TextArea.svelte";
-    import Manipulation from "$lib/manipulations/components/Manipulation.svelte";
+	import TextArea from '$lib/components/TextArea.svelte';
+	import Manipulation from '$lib/manipulations/components/Manipulation.svelte';
 
-    import { type TManipulation, applyManipulations } from "$lib/manipulations";
+	import { type TManipulation, applyManipulations } from '$lib/manipulations';
 
-    export let manipulation: TManipulation
-    export let source: string
+	export let manipulation: TManipulation;
+	export let source: string;
 
-    let result: string
+	let result: string;
 
-    $: result = applyManipulations(source, [manipulation])
+	$: result = applyManipulations(source, [manipulation]);
 </script>
 
-
 <div>
-    <TextArea bind:value={source} />
-    <Manipulation bind:manipulation={manipulation} />
-    <TextArea bind:value={result} />
+	<TextArea bind:value={source} />
+	<Manipulation bind:manipulation />
+	<TextArea bind:value={result} />
 </div>
 
 <style>
-    div {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-    }
+	div {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+	}
 </style>

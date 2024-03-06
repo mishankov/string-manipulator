@@ -1,28 +1,28 @@
 <script lang="ts">
-  import type { TManipulation } from "..";
-  import { Manipulation, AddManipulation } from "..";
+	import type { TManipulation } from '..';
+	import { Manipulation, AddManipulation } from '..';
 
-  export let manipulations: TManipulation[] = []
+	export let manipulations: TManipulation[] = [];
 
-  function handleManipulationDelete(event: CustomEvent) {
-    manipulations = manipulations.filter((manipulation) => {
-      return manipulation.id !== event.detail.id
-    })
-  }
+	function handleManipulationDelete(event: CustomEvent) {
+		manipulations = manipulations.filter((manipulation) => {
+			return manipulation.id !== event.detail.id;
+		});
+	}
 </script>
 
 <div id="manipulations" class="manipulations">
-  {#each manipulations as manipulation (manipulation.id)}
-      <Manipulation bind:manipulation={manipulation} on:delete={handleManipulationDelete}/>
-  {/each}
+	{#each manipulations as manipulation (manipulation.id)}
+		<Manipulation bind:manipulation on:delete={handleManipulationDelete} />
+	{/each}
 </div>
 
-<AddManipulation bind:manipulations={manipulations} />
+<AddManipulation bind:manipulations />
 
 <style>
-  .manipulations {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+	.manipulations {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
 </style>

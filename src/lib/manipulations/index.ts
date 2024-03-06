@@ -1,21 +1,17 @@
-import Append, { type AppendManipulation } from "./components/Append.svelte";
-import Compose, { type ComposeManipulation } from "./components/Compose.svelte";
-import Prepend, { type PrependManipulation } from "./components/Prepend.svelte";
-import Replace, { type ReplaceManipulation } from "./components/Replace.svelte";
-import Slice, { type SliceManipulation } from "./components/Slice.svelte";
-import SplitCompose, {
-	type SplitComposeManipulation,
-} from "./components/SplitCompose.svelte";
+import Append, { type AppendManipulation } from './components/Append.svelte';
+import Compose, { type ComposeManipulation } from './components/Compose.svelte';
+import Prepend, { type PrependManipulation } from './components/Prepend.svelte';
+import Replace, { type ReplaceManipulation } from './components/Replace.svelte';
+import Slice, { type SliceManipulation } from './components/Slice.svelte';
+import SplitCompose, { type SplitComposeManipulation } from './components/SplitCompose.svelte';
 import SplitGetFromIndex, {
-	type SplitGetFromIndexManipulation,
-} from "./components/SplitGetFromIndex.svelte";
-import SplitJoin, {
-	type SplitJoinManipulation,
-} from "./components/SplitJoin.svelte";
+	type SplitGetFromIndexManipulation
+} from './components/SplitGetFromIndex.svelte';
+import SplitJoin, { type SplitJoinManipulation } from './components/SplitJoin.svelte';
 
-import AddManipulation from "./components/AddManipulation.svelte";
-import Manipulation from "./components/Manipulation.svelte";
-import ManipulationsList from "./components/ManipulationsList.svelte";
+import AddManipulation from './components/AddManipulation.svelte';
+import Manipulation from './components/Manipulation.svelte';
+import ManipulationsList from './components/ManipulationsList.svelte';
 
 // Re-export components
 export {
@@ -29,7 +25,7 @@ export {
 	SplitJoin,
 	Manipulation,
 	AddManipulation,
-	ManipulationsList,
+	ManipulationsList
 };
 
 export interface ManipulationBase {
@@ -52,69 +48,50 @@ export type InnerSplitJoinManipulation = TManipulation;
 
 function prepareInput(input: string): string {
 	const stuffToReplace = [
-		["\\\\n", "\n"],
-		["\\\\t", "\t"],
+		['\\\\n', '\n'],
+		['\\\\t', '\t']
 	];
 
-	const preparedInput = stuffToReplace.reduce(
-		(previousResult, currentValue, index, array) => {
-			return previousResult.replaceAll(
-				new RegExp(currentValue[0], "g"),
-				currentValue[1],
-			);
-		},
-		input,
-	);
+	const preparedInput = stuffToReplace.reduce((previousResult, currentValue, index, array) => {
+		return previousResult.replaceAll(new RegExp(currentValue[0], 'g'), currentValue[1]);
+	}, input);
 
 	return preparedInput;
 }
 
-export function applyManipulations(
-	source: string,
-	manipulations: TManipulation[],
-): string {
+export function applyManipulations(source: string, manipulations: TManipulation[]): string {
 	return manipulations.reduce((previousResult, curentManipulation) => {
 		return doManipulation(previousResult, curentManipulation);
 	}, source);
 }
 
 // Function to apply manipulations
-export function doManipulation(
-	input: string,
-	manipulation: TManipulation,
-): string {
+export function doManipulation(input: string, manipulation: TManipulation): string {
 	const result = doManipulationInner(input, manipulation);
 
-	console.log(
-		`${input.replaceAll("\n", "\\n")} -> ${JSON.stringify(
-			manipulation,
-		)} => ${result}}`,
-	);
+	console.log(`${input.replaceAll('\n', '\\n')} -> ${JSON.stringify(manipulation)} => ${result}}`);
 
 	return result;
 }
 
-function doManipulationInner(
-	input: string,
-	manipulation: TManipulation,
-): string {
+function doManipulationInner(input: string, manipulation: TManipulation): string {
 	try {
 		switch (manipulation.type) {
-			case "replace": {
-				if (manipulation.from === "") return input;
+			case 'replace': {
+				if (manipulation.from === '') return input;
 
 				return input.replaceAll(
-					new RegExp(prepareInput(manipulation.from), "g"),
-					prepareInput(manipulation.to),
+					new RegExp(prepareInput(manipulation.from), 'g'),
+					prepareInput(manipulation.to)
 				);
 			}
-			case "append": {
+			case 'append': {
 				return input + prepareInput(manipulation.suffix);
 			}
-			case "prepend": {
+			case 'prepend': {
 				return prepareInput(manipulation.prefix) + input;
 			}
-			case "splitGetFromIndex": {
+			case 'splitGetFromIndex': {
 				if (manipulation.splitString.length === 0) return input;
 				const splittedInput = input.split(manipulation.splitString);
 
@@ -124,39 +101,30 @@ function doManipulationInner(
 
 				return input;
 			}
-			case "compose": {
-				return prepareInput(manipulation.pattern).replaceAll(
-					manipulation.placeholder,
-					input,
-				);
+			case 'compose': {
+				return prepareInput(manipulation.pattern).replaceAll(manipulation.placeholder, input);
 			}
-			case "slice": {
+			case 'slice': {
 				if (manipulation.end === null) {
 					return input.slice(manipulation.start);
 				}
 				return input.slice(manipulation.start, manipulation.end);
 			}
-			case "splitCompose": {
+			case 'splitCompose': {
 				if (manipulation.splitString.length === 0) return input;
 				const splittedInput = input.split(manipulation.splitString);
 
 				if (splittedInput.length === 1) return input;
 
-				return splittedInput.reduce(
-					(previousResult, currentValue, currentIndex, array) => {
-						const placeholderWithIndex = manipulation.placeholder.replaceAll(
-							"d",
-							currentIndex.toString(),
-						);
-						return previousResult.replaceAll(
-							placeholderWithIndex,
-							currentValue,
-						);
-					},
-					manipulation.pattern,
-				);
+				return splittedInput.reduce((previousResult, currentValue, currentIndex, array) => {
+					const placeholderWithIndex = manipulation.placeholder.replaceAll(
+						'd',
+						currentIndex.toString()
+					);
+					return previousResult.replaceAll(placeholderWithIndex, currentValue);
+				}, manipulation.pattern);
 			}
-			case "splitJoin": {
+			case 'splitJoin': {
 				return input
 					.split(prepareInput(manipulation.splitString))
 					.map((value, index, array) => {
@@ -169,8 +137,8 @@ function doManipulationInner(
 		if (exception instanceof Error) {
 			console.log(
 				`Exception occured with manipulation ${JSON.stringify(
-					manipulation,
-				)}: ${exception.toString()}`,
+					manipulation
+				)}: ${exception.toString()}`
 			);
 		}
 		return input;

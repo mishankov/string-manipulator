@@ -1,11 +1,11 @@
 html {
-  --bg-color-100: hsl(157, 100%, 90%);
-  --border-color-100: hsl(157, 100%, 10%);
+	--bg-color-100: hsl(157, 100%, 90%);
+	--border-color-100: hsl(157, 100%, 10%);
 
-  --text-color: hsl(157, 100%, 10%);
+	--text-color: hsl(157, 100%, 10%);
 }
 
 body {
-  background-color: var(--bg-color-100);
-  font-family: monospace;
+	background-color: var(--bg-color-100);
+	font-family: monospace;
 }
