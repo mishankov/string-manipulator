@@ -13,4 +13,5 @@ Available manipulations:
 - Compose
 - Slice
 - Split-compose
+- Trim
 - Split-join

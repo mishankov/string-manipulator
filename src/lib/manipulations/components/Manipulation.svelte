@@ -10,6 +10,7 @@
 		Compose,
 		Slice,
 		SplitCompose,
+		Trim,
 		SplitJoin
 	} from '..';
 
@@ -46,6 +47,8 @@
 			bind:pattern={manipulation.pattern}
 			bind:placeholder={manipulation.placeholder}
 		/>
+	{:else if manipulation.type == 'trim'}
+		<Trim bind:trimType={manipulation.trimType} />
 	{:else if manipulation.type == 'splitJoin'}
 		<SplitJoin
 			bind:splitString={manipulation.splitString}

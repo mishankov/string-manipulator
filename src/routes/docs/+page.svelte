@@ -65,17 +65,24 @@
 			}
 		},
 		{
+			name: 'Trim',
+			description: 'Trim all, leading or triling spaces from input',
+			source: '  Some good input  ',
+			manipulation: { id: 'trim', type: 'trim', trimType: 'all' }
+		},
+		{
 			name: 'Split-join',
 			description: 'Split input by delimeter, apply manipulations and join',
 			source: 'Zero, one, two, three',
 			manipulation: {
 				id: 'splitJoin',
 				type: 'splitJoin',
-				splitString: ', ',
+				splitString: ',',
 				joinString: '\\n',
 				innerManipulations: [
-					{ id: 'splitJoinprepend', type: 'prepend', prefix: 'Number: ' },
-					{ id: 'splitJoinappend', type: 'append', suffix: '!' }
+					{ id: 'splitJoinTrim', type: 'trim', trimType: 'leading' },
+					{ id: 'splitJoinPrepend', type: 'prepend', prefix: 'Number: ' },
+					{ id: 'splitJoinAppend', type: 'append', suffix: '!' }
 				]
 			}
 		}

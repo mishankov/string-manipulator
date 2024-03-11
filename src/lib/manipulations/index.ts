@@ -8,6 +8,7 @@ import SplitGetFromIndex, {
 	type SplitGetFromIndexManipulation
 } from './components/SplitGetFromIndex.svelte';
 import SplitJoin, { type SplitJoinManipulation } from './components/SplitJoin.svelte';
+import Trim, { type TrimManipulation } from './components/Trim.svelte';
 
 import AddManipulation from './components/AddManipulation.svelte';
 import Manipulation from './components/Manipulation.svelte';
@@ -23,6 +24,7 @@ export {
 	SplitCompose,
 	SplitGetFromIndex,
 	SplitJoin,
+	Trim,
 	Manipulation,
 	AddManipulation,
 	ManipulationsList
@@ -41,7 +43,8 @@ export type TManipulation =
 	| SliceManipulation
 	| SplitComposeManipulation
 	| SplitGetFromIndexManipulation
-	| SplitJoinManipulation;
+	| SplitJoinManipulation
+	| TrimManipulation;
 
 // Supported manupulations to use in splitJoin
 export type InnerSplitJoinManipulation = TManipulation;
@@ -131,6 +134,19 @@ function doManipulationInner(input: string, manipulation: TManipulation): string
 						return applyManipulations(value, manipulation.innerManipulations);
 					})
 					.join(prepareInput(manipulation.joinString));
+			}
+			case 'trim': {
+				switch (manipulation.trimType) {
+					case 'leading': {
+						return input.trimStart();
+					}
+					case 'trailing': {
+						return input.trimEnd();
+					}
+					case 'all': {
+						return input.trim();
+					}
+				}
 			}
 		}
 	} catch (exception) {
