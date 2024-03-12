@@ -1,5 +1,6 @@
 html {
 	--bg-color-100: hsl(157, 100%, 90%);
+	--bg-color-150: hsl(157, 100%, 95%);
 	--border-color-100: hsl(157, 100%, 10%);
 
 	--text-color: hsl(157, 100%, 10%);

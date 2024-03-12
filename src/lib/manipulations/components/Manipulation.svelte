@@ -87,7 +87,7 @@
 
 	.delete:hover {
 		outline: none;
-		border: 2px solid var(--border-color-100);
+		background-color: var(--bg-color-150);
 	}
 
 	.delete:active {
