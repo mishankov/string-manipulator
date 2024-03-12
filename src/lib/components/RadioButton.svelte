@@ -17,7 +17,6 @@
 	{/each}
 </div>
 
-
 <style>
 	div {
 		display: flex;
