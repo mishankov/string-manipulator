@@ -4,7 +4,7 @@
 
   export interface TrimManipulation extends ManipulationBase {
     type: 'trim';
-    trimType: 'leading' | 'trailing' | 'all';
+    trimType: string;
   }
 
   const options = [

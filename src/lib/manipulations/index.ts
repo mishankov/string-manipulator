@@ -146,6 +146,9 @@ function doManipulationInner(input: string, manipulation: TManipulation): string
 					case 'all': {
 						return input.trim();
 					}
+					default: {
+						return input;
+					}
 				}
 			}
 		}
