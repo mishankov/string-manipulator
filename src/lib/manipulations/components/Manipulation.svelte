@@ -10,6 +10,7 @@
 		Compose,
 		Slice,
 		SplitCompose,
+		Trim,
 		SplitJoin
 	} from '..';
 
@@ -46,6 +47,8 @@
 			bind:pattern={manipulation.pattern}
 			bind:placeholder={manipulation.placeholder}
 		/>
+	{:else if manipulation.type == 'trim'}
+		<Trim bind:trimType={manipulation.trimType} />
 	{:else if manipulation.type == 'splitJoin'}
 		<SplitJoin
 			bind:splitString={manipulation.splitString}
@@ -84,7 +87,7 @@
 
 	.delete:hover {
 		outline: none;
-		border: 2px solid var(--border-color-100);
+		background-color: var(--bg-color-150);
 	}
 
 	.delete:active {
