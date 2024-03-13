@@ -66,7 +66,7 @@
 		},
 		{
 			name: 'Trim',
-			description: 'Trim all, leading or triling spaces from input',
+			description: 'Trim all, leading or trailing spaces from input',
 			source: '  Some good input  ',
 			manipulation: { id: 'trim', type: 'trim', trimType: 'all' }
 		},
