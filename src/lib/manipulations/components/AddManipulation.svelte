@@ -81,6 +81,13 @@
 					id: randomId()
 				});
 				break;
+			case 'case':
+				manipulations.push({
+					type: 'case',
+					caseType: 'lower',
+					id: randomId()
+				});
+				break;
 		}
 
 		manipulations = manipulations;
@@ -98,5 +105,6 @@
 	<option value="slice">Slice</option>
 	<option value="splitCompose">Split-compose</option>
 	<option value="trim">Trim</option>
+	<option value="case">Case</option>
 	<option value="splitJoin">Split-join</option>
 </select>
