@@ -14,4 +14,5 @@ Available manipulations:
 - Slice
 - Split-compose
 - Trim
+- Case
 - Split-join

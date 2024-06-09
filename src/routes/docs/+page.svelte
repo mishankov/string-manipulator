@@ -71,6 +71,12 @@
 			manipulation: { id: 'trim', type: 'trim', trimType: 'all' }
 		},
 		{
+			name: 'Case',
+			description: 'Transform input to lower or upper case',
+			source: 'Some gOOd iNPuT',
+			manipulation: { id: 'case', type: 'case', caseType: 'lower' }
+		},
+		{
 			name: 'Split-join',
 			description: 'Split input by delimeter, apply manipulations and join',
 			source: 'Zero, one, two, three',
@@ -81,6 +87,7 @@
 				joinString: '\\n',
 				innerManipulations: [
 					{ id: 'splitJoinTrim', type: 'trim', trimType: 'leading' },
+					{ id: 'splitJoinCase', type: 'case', caseType: 'lower' },
 					{ id: 'splitJoinPrepend', type: 'prepend', prefix: 'Number: ' },
 					{ id: 'splitJoinAppend', type: 'append', suffix: '!' }
 				]

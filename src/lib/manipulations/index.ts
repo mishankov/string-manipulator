@@ -9,6 +9,7 @@ import SplitGetFromIndex, {
 } from './components/SplitGetFromIndex.svelte';
 import SplitJoin, { type SplitJoinManipulation } from './components/SplitJoin.svelte';
 import Trim, { type TrimManipulation } from './components/Trim.svelte';
+import Case, { type CaseManipulation } from './components/Case.svelte';
 
 import AddManipulation from './components/AddManipulation.svelte';
 import Manipulation from './components/Manipulation.svelte';
@@ -25,6 +26,7 @@ export {
 	SplitGetFromIndex,
 	SplitJoin,
 	Trim,
+	Case,
 	Manipulation,
 	AddManipulation,
 	ManipulationsList
@@ -44,7 +46,8 @@ export type TManipulation =
 	| SplitComposeManipulation
 	| SplitGetFromIndexManipulation
 	| SplitJoinManipulation
-	| TrimManipulation;
+	| TrimManipulation
+	| CaseManipulation;
 
 // Supported manupulations to use in splitJoin
 export type InnerSplitJoinManipulation = TManipulation;
@@ -145,6 +148,19 @@ function doManipulationInner(input: string, manipulation: TManipulation): string
 					}
 					case 'all': {
 						return input.trim();
+					}
+					default: {
+						return input;
+					}
+				}
+			}
+			case 'case': {
+				switch (manipulation.caseType) {
+					case 'lower': {
+						return input.toLowerCase();
+					}
+					case 'upper': {
+						return input.toUpperCase();
 					}
 					default: {
 						return input;

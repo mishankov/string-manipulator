@@ -11,3 +11,8 @@ it('Test trim manipulation', () => {
 	expect(doManipulation('   input    ', { type: 'trim', trimType: 'trailing' })).eq('   input');
 	expect(doManipulation('   input    ', { type: 'trim', trimType: 'all' })).eq('input');
 });
+
+it('Test case manipulation', () => {
+	expect(doManipulation('gOOd iNPuT', { type: 'case', caseType: 'lower' })).eq('good input');
+	expect(doManipulation('gOOd iNPuT', { type: 'case', caseType: 'upper' })).eq('GOOD INPUT');
+});

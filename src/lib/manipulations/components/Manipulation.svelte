@@ -11,6 +11,7 @@
 		Slice,
 		SplitCompose,
 		Trim,
+		Case,
 		SplitJoin
 	} from '..';
 
@@ -49,6 +50,8 @@
 		/>
 	{:else if manipulation.type == 'trim'}
 		<Trim bind:trimType={manipulation.trimType} />
+	{:else if manipulation.type == 'case'}
+		<Case bind:caseType={manipulation.caseType} />
 	{:else if manipulation.type == 'splitJoin'}
 		<SplitJoin
 			bind:splitString={manipulation.splitString}
