@@ -20,7 +20,8 @@
 
 <div>
 	<span>Split by</span> <input bind:value={splitString} /> <span>and replace placeholder</span>
-	<input bind:value={placeholder} /> <span>in pattern</span> <textarea bind:value={pattern}></textarea>
+	<input bind:value={placeholder} /> <span>in pattern</span>
+	<textarea bind:value={pattern}></textarea>
 </div>
 
 <style>
