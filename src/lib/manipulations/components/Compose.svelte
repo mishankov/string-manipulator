@@ -18,7 +18,7 @@
 
 <div>
 	<span>Replace placeholder</span> <input bind:value={placeholder} /> <span>in pattern</span>
-	<textarea bind:value={pattern}></textarea>
+	<textarea bind:value={pattern} />
 </div>
 
 <style>
