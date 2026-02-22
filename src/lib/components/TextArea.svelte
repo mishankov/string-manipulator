@@ -9,7 +9,7 @@
 	<label for={id}>{labelText}</label>
 {/if}
 
-<textarea {id} bind:value {spellcheck} />
+<textarea {id} bind:value {spellcheck}></textarea>
 
 <style>
 	textarea {

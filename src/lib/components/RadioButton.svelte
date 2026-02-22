@@ -9,7 +9,7 @@
 </script>
 
 <div>
-	{#each options as option}
+	{#each options as option (option.value)}
 		<label>
 			<input type="radio" bind:group={selected} value={option.value} />
 			{option.label}
