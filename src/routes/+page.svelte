@@ -19,8 +19,6 @@
 		}
 	];
 
-	let copySuccess = false;
-	let pasteError = '';
 	let isMounted = false;
 
 	// Convert manipulations to JSON string
@@ -48,34 +46,6 @@
 		return decodeURIComponent(escape(atob(str)));
 	}
 
-	// Copy manipulations to clipboard
-	async function copyManipulations() {
-		try {
-			await navigator.clipboard.writeText(manipulationsToJSON());
-			copySuccess = true;
-			pasteError = '';
-			setTimeout(() => (copySuccess = false), 2000);
-		} catch (err) {
-			pasteError = 'Failed to copy to clipboard';
-		}
-	}
-
-	// Paste manipulations from clipboard
-	async function pasteManipulations() {
-		try {
-			const text = await navigator.clipboard.readText();
-			const parsed = jsonToManipulations(text);
-			if (parsed) {
-				manipulations = parsed;
-				pasteError = '';
-			} else {
-				pasteError = 'Invalid JSON format';
-			}
-		} catch (err) {
-			pasteError = 'Failed to read from clipboard';
-		}
-	}
-
 	// Update URL with current manipulations
 	function updateURL() {
 		if (!isMounted) return;
@@ -83,7 +53,7 @@
 		const encoded = toBase64(jsonStr);
 		const url = new URL(window.location.href);
 		url.searchParams.set('manipulations', encoded);
-		window.history.replaceState({}, '', url.toString());
+		window.history.pushState({}, '', url.toString());
 	}
 
 	// Load manipulations from URL
@@ -135,16 +105,6 @@
 			<Link link="/docs">Docs</Link>
 		</div>
 		<ManipulationsPanel bind:manipulations />
-
-		<div class="actions">
-			<button class="action-btn" on:click={copyManipulations} disabled={copySuccess}>
-				{copySuccess ? '✓ Copied!' : '📋 Copy JSON'}
-			</button>
-			<button class="action-btn" on:click={pasteManipulations}>📝 Paste JSON</button>
-		</div>
-		{#if pasteError}
-			<div class="error">{pasteError}</div>
-		{/if}
 	</div>
 
 	<div class="panel">
@@ -173,37 +133,5 @@
 		flex-direction: row;
 		gap: 10px;
 		align-items: end;
-	}
-
-	.actions {
-		display: flex;
-		gap: 8px;
-		margin-top: 4px;
-	}
-
-	.action-btn {
-		flex: 1;
-		padding: 8px 12px;
-		background-color: #f0f0f0;
-		border: 1px solid #ccc;
-		border-radius: 4px;
-		cursor: pointer;
-		font-size: 13px;
-		transition: background-color 0.2s;
-	}
-
-	.action-btn:hover:not(:disabled) {
-		background-color: #e0e0e0;
-	}
-
-	.action-btn:disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
-
-	.error {
-		color: #d32f2f;
-		font-size: 12px;
-		margin-top: -6px;
 	}
 </style>
