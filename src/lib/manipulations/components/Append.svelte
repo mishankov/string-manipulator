@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
 
 	export interface AppendManipulation extends ManipulationBase {
@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	export let { suffix }: AppendManipulation = { suffix: '', type: 'append' };
+	let { suffix = $bindable() }: { suffix: string } = $props();
 </script>
 
 <div>

@@ -4,12 +4,15 @@
 
 	import { type TManipulation, applyManipulations } from '$lib/manipulations';
 
-	export let manipulation: TManipulation;
-	export let source: string;
+	let {
+		manipulation = $bindable(),
+		source = $bindable()
+	}: {
+		manipulation: TManipulation;
+		source: string;
+	} = $props();
 
-	let result: string;
-
-	$: result = applyManipulations(source, [manipulation]);
+	let result = $derived(applyManipulations(source, [manipulation]));
 </script>
 
 <div>

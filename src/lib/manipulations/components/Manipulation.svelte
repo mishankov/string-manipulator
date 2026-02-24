@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-
 	import { type TManipulation } from '..';
 	import {
 		Replace,
@@ -15,14 +13,18 @@
 		SplitJoin
 	} from '..';
 
-	export let manipulation: TManipulation;
+	let {
+		manipulation = $bindable(),
+		ondelete
+	}: {
+		manipulation: TManipulation;
+		ondelete?: (id: string) => void;
+	} = $props();
 
-	const dispatch = createEventDispatcher();
-
-	function sendDeleteEvent() {
-		dispatch('delete', {
-			id: manipulation.id
-		});
+	function handleDelete() {
+		if (manipulation.id) {
+			ondelete?.(manipulation.id);
+		}
 	}
 </script>
 
@@ -59,8 +61,7 @@
 			bind:innerManipulations={manipulation.innerManipulations}
 		/>
 	{/if}
-	<button class="delete" on:click={sendDeleteEvent}><img src="trash-can.svg" alt="Delete" /></button
-	>
+	<button class="delete" onclick={handleDelete}><img src="trash-can.svg" alt="Delete" /></button>
 </div>
 
 <style>

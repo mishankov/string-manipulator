@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
 
 	export interface PrependManipulation extends ManipulationBase {
@@ -8,7 +8,7 @@
 </script>
 
 <script lang="ts">
-	export let { prefix }: PrependManipulation = { prefix: '', type: 'prepend' };
+	let { prefix = $bindable() }: { prefix: string } = $props();
 </script>
 
 <div>

@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
 
 	export interface ReplaceManipulation extends ManipulationBase {
@@ -9,7 +9,13 @@
 </script>
 
 <script lang="ts">
-	export let { from, to }: ReplaceManipulation = { from: '', to: '', type: 'replace' };
+	let {
+		from = $bindable(),
+		to = $bindable()
+	}: {
+		from: string;
+		to: string;
+	} = $props();
 </script>
 
 <div>

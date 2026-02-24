@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
 
 	export interface SplitGetFromIndexManipulation extends ManipulationBase {
@@ -9,11 +9,13 @@
 </script>
 
 <script lang="ts">
-	export let { splitString, index }: SplitGetFromIndexManipulation = {
-		splitString: '',
-		index: 0,
-		type: 'splitGetFromIndex'
-	};
+	let {
+		splitString = $bindable(),
+		index = $bindable()
+	}: {
+		splitString: string;
+		index: number;
+	} = $props();
 </script>
 
 <div>

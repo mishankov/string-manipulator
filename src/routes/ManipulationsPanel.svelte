@@ -2,7 +2,7 @@
 	import type { TManipulation } from '$lib/manipulations';
 	import { ManipulationsList } from '$lib/manipulations';
 
-	export let manipulations: TManipulation[] = [];
+	let { manipulations = $bindable() }: { manipulations: TManipulation[] } = $props();
 </script>
 
 <div class="panel">

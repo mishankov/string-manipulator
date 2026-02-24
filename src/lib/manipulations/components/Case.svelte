@@ -1,6 +1,5 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
-	import RadioButton from '$lib/components/RadioButton.svelte';
 
 	export interface CaseManipulation extends ManipulationBase {
 		type: 'case';
@@ -20,7 +19,13 @@
 </script>
 
 <script lang="ts">
-	export let { caseType }: CaseManipulation = { caseType: 'lower', type: 'case' };
+	import RadioButton from '$lib/components/RadioButton.svelte';
+
+	let {
+		caseType = $bindable()
+	}: {
+		caseType: string;
+	} = $props();
 </script>
 
 <div>

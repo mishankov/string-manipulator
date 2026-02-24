@@ -2,18 +2,18 @@
 	import type { TManipulation } from '..';
 	import { Manipulation, AddManipulation } from '..';
 
-	export let manipulations: TManipulation[] = [];
+	let { manipulations = $bindable() }: { manipulations: TManipulation[] } = $props();
 
-	function handleManipulationDelete(event: CustomEvent) {
+	function handleManipulationDelete(id: string) {
 		manipulations = manipulations.filter((manipulation) => {
-			return manipulation.id !== event.detail.id;
+			return manipulation.id !== id;
 		});
 	}
 </script>
 
 <div id="manipulations" class="manipulations">
-	{#each manipulations as manipulation (manipulation.id)}
-		<Manipulation bind:manipulation on:delete={handleManipulationDelete} />
+	{#each manipulations as manipulation, i (manipulation.id)}
+		<Manipulation bind:manipulation={manipulations[i]} ondelete={handleManipulationDelete} />
 	{/each}
 </div>
 

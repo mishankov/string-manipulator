@@ -8,7 +8,15 @@
 	import { onMount } from 'svelte';
 
 	let source = $state('Try me!\nResult will be updated automatically');
-	let manipulations: TManipulation[] = $state([]);
+	let manipulations: TManipulation[] = $state([
+		{
+			type: 'replace',
+			from: '\\n',
+			to: ' -- ',
+			id: 'initial'
+		}
+	]);
+
 	let mounted = $state(false);
 
 	let result = $derived(applyManipulations(source, manipulations));
@@ -39,15 +47,6 @@
 				console.log(parsed);
 				if (parsed) {
 					manipulations = parsed;
-				} else {
-					manipulations = [
-						{
-							type: 'replace',
-							from: '\\n',
-							to: ' -- ',
-							id: 'initial'
-						}
-					];
 				}
 			} catch (e) {
 				console.error('Failed to load manipulations from URL:', e);

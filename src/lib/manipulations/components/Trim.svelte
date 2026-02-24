@@ -1,6 +1,5 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
-	import RadioButton from '$lib/components/RadioButton.svelte';
 
 	export interface TrimManipulation extends ManipulationBase {
 		type: 'trim';
@@ -24,7 +23,9 @@
 </script>
 
 <script lang="ts">
-	export let { trimType }: TrimManipulation = { trimType: 'all', type: 'trim' };
+	import RadioButton from '$lib/components/RadioButton.svelte';
+
+	let { trimType = $bindable() }: { trimType: string } = $props();
 </script>
 
 <div>
