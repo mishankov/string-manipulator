@@ -6,91 +6,55 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import Link from '$lib/components/Link.svelte';
 	import { onMount } from 'svelte';
-	import { page } from '$app/stores';
 
-	let source = 'Try me!\nResult will be updated automatically';
-	let result = '';
-	let manipulations: TManipulation[] = [
-		{
-			type: 'replace',
-			from: '\\n',
-			to: ' -- ',
-			id: 'initial'
+	let source = $state('Try me!\nResult will be updated automatically');
+	let manipulations: TManipulation[] = $state([]);
+	let mounted = $state(false);
+
+	let result = $derived(applyManipulations(source, manipulations));
+
+	$effect(() => {
+		if (mounted) {
+			const j = JSON.stringify(manipulations);
+			const b64 = btoa(encodeURIComponent(j));
+
+			const url = new URL(window.location.href);
+			url.searchParams.set('manipulations', b64);
+			window.history.pushState({}, '', url.toString());
 		}
-	];
+	});
 
-	let isMounted = false;
-
-	// Convert manipulations to JSON string
-	function manipulationsToJSON(): string {
-		return JSON.stringify(manipulations, null, 2);
-	}
-
-	// Convert JSON string to manipulations
-	function jsonToManipulations(jsonStr: string): TManipulation[] | null {
-		try {
-			const parsed = JSON.parse(jsonStr);
-			return parsed as TManipulation[];
-		} catch (e) {
-			return null;
-		}
-	}
-
-	// Encode to Base64 for URL
-	function toBase64(str: string): string {
-		return btoa(unescape(encodeURIComponent(str)));
-	}
-
-	// Decode from Base64
-	function fromBase64(str: string): string {
-		return decodeURIComponent(escape(atob(str)));
-	}
-
-	// Update URL with current manipulations
-	function updateURL() {
-		if (!isMounted) return;
-		const jsonStr = manipulationsToJSON();
-		const encoded = toBase64(jsonStr);
-		const url = new URL(window.location.href);
-		url.searchParams.set('manipulations', encoded);
-		window.history.pushState({}, '', url.toString());
-	}
-
-	// Load manipulations from URL
-	function loadFromURL() {
+	onMount(() => {
 		const urlParams = new URLSearchParams(window.location.search);
+
+		console.log(urlParams);
+
 		const encoded = urlParams.get('manipulations');
+		console.log(encoded);
 		if (encoded) {
 			try {
-				const jsonStr = fromBase64(encoded);
-				const parsed = jsonToManipulations(jsonStr);
+				const jsonStr = decodeURIComponent(atob(encoded));
+				console.log(jsonStr);
+				const parsed = JSON.parse(jsonStr) as TManipulation[];
+				console.log(parsed);
 				if (parsed) {
 					manipulations = parsed;
+				} else {
+					manipulations = [
+						{
+							type: 'replace',
+							from: '\\n',
+							to: ' -- ',
+							id: 'initial'
+						}
+					];
 				}
 			} catch (e) {
 				console.error('Failed to load manipulations from URL:', e);
 			}
 		}
-	}
-
-	onMount(() => {
-		// Load manipulations from URL on mount
-		loadFromURL();
-
-		// Mark as mounted after loading from URL
-		isMounted = true;
-
-		document.addEventListener('keydown', (event) => {
-			if (event.ctrlKey && event.key === 'Enter') {
-				result = applyManipulations(source, manipulations);
-			}
-		});
+		mounted = true;
 	});
-
-	// Update URL when manipulations change (after initial mount)
-	$: if (isMounted) updateURL();
-
-	$: result = applyManipulations(source, manipulations);
 </script>
 
 <div class="panels">
