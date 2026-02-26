@@ -45,7 +45,7 @@
 				console.log(jsonStr);
 				const parsed = JSON.parse(jsonStr) as TManipulation[];
 				console.log(parsed);
-				if (parsed) {
+				if (parsed && parsed.length > 0) {
 					manipulations = parsed;
 				}
 			} catch (e) {
