@@ -14,7 +14,9 @@
 					console.error('Service Worker registration error:', error);
 					// Show user-facing notification that offline mode won't be available
 					if (typeof window !== 'undefined') {
-						console.warn('Offline functionality will not be available. This may be due to private browsing mode or browser restrictions.');
+						console.warn(
+							'Offline functionality will not be available. This may be due to private browsing mode or browser restrictions.'
+						);
 					}
 				}
 			});
