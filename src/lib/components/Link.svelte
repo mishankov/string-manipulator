@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	export let link: string;
+	import type { Snippet } from 'svelte';
+	let { link, children }: { link: string; children: Snippet } = $props();
 </script>
 
-<a href="{base}{link}"><slot /></a>
+<a href="{base}{link}">{@render children()}</a>
 
 <style>
 	a {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { TManipulation } from '..';
 
-	export let manipulations: TManipulation[] = [];
+	let { manipulations = $bindable() }: { manipulations: TManipulation[] } = $props();
 
 	function randomId() {
 		return (Math.random() + 1).toString(36).substring(2);
@@ -95,7 +95,7 @@
 	}
 </script>
 
-<select on:change={onNewManipulationSelect}>
+<select onchange={onNewManipulationSelect}>
 	<option value="add">Add</option>
 	<option value="replace">Replace</option>
 	<option value="prepend">Prepend</option>

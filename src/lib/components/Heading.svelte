@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let text: string;
+	let { text }: { text: string } = $props();
 </script>
 
 <h1>{text}</h1>

@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
 
 	export interface SplitComposeManipulation extends ManipulationBase {
@@ -10,12 +10,15 @@
 </script>
 
 <script lang="ts">
-	export let { splitString, pattern, placeholder }: SplitComposeManipulation = {
-		splitString: ',',
-		pattern: '{1}, {0}',
-		placeholder: '{d}',
-		type: 'splitCompose'
-	};
+	let {
+		splitString = $bindable(),
+		pattern = $bindable(),
+		placeholder = $bindable()
+	}: {
+		splitString: string;
+		pattern: string;
+		placeholder: string;
+	} = $props();
 </script>
 
 <div>

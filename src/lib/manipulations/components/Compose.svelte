@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
 
 	export interface ComposeManipulation extends ManipulationBase {
@@ -9,11 +9,13 @@
 </script>
 
 <script lang="ts">
-	export let { pattern, placeholder }: ComposeManipulation = {
-		pattern: '',
-		placeholder: '{}',
-		type: 'compose'
-	};
+	let {
+		pattern = $bindable(),
+		placeholder = $bindable()
+	}: {
+		pattern: string;
+		placeholder: string;
+	} = $props();
 </script>
 
 <div>

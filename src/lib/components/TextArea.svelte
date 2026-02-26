@@ -1,8 +1,15 @@
 <script lang="ts">
-	export let value = '';
-	export let id = 'ta';
-	export let labelText = '';
-	export let spellcheck = false;
+	let {
+		value = $bindable(''),
+		id = 'ta',
+		labelText = '',
+		spellcheck = false
+	}: {
+		value?: string;
+		id?: string;
+		labelText?: string;
+		spellcheck?: boolean;
+	} = $props();
 </script>
 
 {#if labelText !== ''}

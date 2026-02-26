@@ -4,8 +4,13 @@
 		label: string;
 	}
 
-	export let options: Option[];
-	export let selected: string;
+	let {
+		options,
+		selected = $bindable()
+	}: {
+		options: Option[];
+		selected: string;
+	} = $props();
 </script>
 
 <div>

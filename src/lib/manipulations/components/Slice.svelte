@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { ManipulationBase } from '..';
 
 	export interface SliceManipulation extends ManipulationBase {
@@ -9,7 +9,13 @@
 </script>
 
 <script lang="ts">
-	export let { start, end }: SliceManipulation = { start: 0, end: -1, type: 'slice' };
+	let {
+		start = $bindable(),
+		end = $bindable()
+	}: {
+		start: number;
+		end: number;
+	} = $props();
 </script>
 
 <div>

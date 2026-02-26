@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import type { InnerSplitJoinManipulation, ManipulationBase } from '..';
 
 	export interface SplitJoinManipulation extends ManipulationBase {
@@ -12,12 +12,15 @@
 <script lang="ts">
 	import { ManipulationsList } from '..';
 
-	export let { splitString, joinString, innerManipulations }: SplitJoinManipulation = {
-		splitString: '',
-		joinString: '',
-		innerManipulations: [],
-		type: 'splitJoin'
-	};
+	let {
+		splitString = $bindable(),
+		joinString = $bindable(),
+		innerManipulations = $bindable()
+	}: {
+		splitString: string;
+		joinString: string;
+		innerManipulations: InnerSplitJoinManipulation[];
+	} = $props();
 </script>
 
 <div class="manipulation">
