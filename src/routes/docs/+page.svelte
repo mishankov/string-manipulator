@@ -121,19 +121,30 @@
 		justify-content: center;
 		gap: 10px;
 
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 10px;
+		max-width: 1200px;
+		margin: 0 auto;
 	}
 
 	.docs-row {
 		display: flex;
 		flex-direction: row;
-		margin: auto;
 		align-items: end;
 		gap: 10px;
+		flex-wrap: wrap;
 	}
 
 	h2 {
 		margin-top: 20px;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 8px;
+		}
+
+		.docs-row {
+			gap: 8px;
+		}
 	}
 </style>

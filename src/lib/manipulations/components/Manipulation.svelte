@@ -70,6 +70,7 @@
 		flex-direction: row;
 		gap: 10px;
 		align-items: center;
+		flex-wrap: wrap;
 
 		padding: 10px;
 		background-color: #fff;
@@ -102,5 +103,12 @@
 	.delete img {
 		min-width: 20px;
 		height: 20px;
+	}
+
+	@media (max-width: 768px) {
+		div {
+			gap: 8px;
+			padding: 8px;
+		}
 	}
 </style>

@@ -89,6 +89,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+		min-width: 0;
 	}
 
 	.header-with-link {
@@ -96,5 +97,16 @@
 		flex-direction: row;
 		gap: 10px;
 		align-items: end;
+	}
+
+	@media (max-width: 768px) {
+		.panels {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
+
+		.panel {
+			gap: 8px;
+		}
 	}
 </style>

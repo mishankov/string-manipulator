@@ -26,5 +26,13 @@
 		display: flex;
 		flex-direction: row;
 		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	@media (max-width: 768px) {
+		div {
+			flex-direction: column;
+			gap: 8px;
+		}
 	}
 </style>
