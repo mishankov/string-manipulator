@@ -1,7 +1,7 @@
 <script lang="ts">
 	let {
 		value = $bindable(''),
-		id = 'ta',
+		id,
 		labelText = '',
 		spellcheck = false
 	}: {
@@ -16,7 +16,7 @@
 	<label for={id}>{labelText}</label>
 {/if}
 
-<textarea {id} bind:value {spellcheck}></textarea>
+<textarea id={id ?? undefined} bind:value {spellcheck}></textarea>
 
 <style>
 	textarea {

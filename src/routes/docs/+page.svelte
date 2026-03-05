@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { type TManipulation } from '$lib/manipulations';
 	import Link from '$lib/components/Link.svelte';
 	import ManipulationBlock from './ManipulationBlock.svelte';
@@ -10,7 +11,7 @@
 		manipulation: TManipulation;
 	}
 
-	const manipulationsDocs: ManipulationDoc[] = [
+	const docsTemplate: ManipulationDoc[] = [
 		{
 			name: 'Replace',
 			description: 'Replaces all occurencies of a string in input',
@@ -94,6 +95,17 @@
 			}
 		}
 	];
+
+	function cloneDocsTemplate(): ManipulationDoc[] {
+		return JSON.parse(JSON.stringify(docsTemplate)) as ManipulationDoc[];
+	}
+
+	let docsState = $state(cloneDocsTemplate());
+
+	onMount(() => {
+		// Ensure route always starts from canonical examples after refresh.
+		docsState = cloneDocsTemplate();
+	});
 </script>
 
 <div class="container">
@@ -102,7 +114,7 @@
 		<Link link="/">Go to app</Link>
 	</div>
 
-	{#each manipulationsDocs as doc (doc.name)}
+	{#each docsState as doc (doc.name)}
 		<div class="docs-row"><h2>{doc.name}</h2></div>
 		<div class="docs-row">
 			<p>{doc.description}</p>

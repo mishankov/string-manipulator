@@ -5,19 +5,31 @@
 	import { type TManipulation, applyManipulations } from '$lib/manipulations';
 
 	let {
-		manipulation = $bindable(),
-		source = $bindable()
+		manipulation,
+		source
 	}: {
 		manipulation: TManipulation;
 		source: string;
 	} = $props();
 
-	let result = $derived(applyManipulations(source, [manipulation]));
+	function cloneManipulation(value: TManipulation): TManipulation {
+		return JSON.parse(JSON.stringify(value)) as TManipulation;
+	}
+
+	let localSource = $state(source);
+	let localManipulation = $state(cloneManipulation(manipulation));
+
+	$effect(() => {
+		localSource = source;
+		localManipulation = cloneManipulation(manipulation);
+	});
+
+	let result = $derived(applyManipulations(localSource, [localManipulation]));
 </script>
 
 <div>
-	<TextArea bind:value={source} />
-	<Manipulation bind:manipulation />
+	<TextArea bind:value={localSource} />
+	<Manipulation bind:manipulation={localManipulation} />
 	<TextArea bind:value={result} />
 </div>
 
