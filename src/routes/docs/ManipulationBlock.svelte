@@ -23,15 +23,14 @@
 
 <style>
 	div {
-		display: flex;
-		flex-direction: row;
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
 		gap: 10px;
-		flex-wrap: wrap;
 	}
 
 	@media (max-width: 768px) {
 		div {
-			flex-direction: column;
+			grid-template-columns: 1fr;
 			gap: 8px;
 		}
 	}
