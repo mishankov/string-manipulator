@@ -16,7 +16,7 @@
 	<label for={id}>{labelText}</label>
 {/if}
 
-<textarea id={id ?? undefined} bind:value {spellcheck}></textarea>
+<textarea id={id} bind:value {spellcheck}></textarea>
 
 <style>
 	textarea {

@@ -16,20 +16,24 @@
 		return JSON.parse(JSON.stringify(value)) as TManipulation;
 	}
 
-	let localSource = $state(source);
-	let localManipulation = $state(cloneManipulation(manipulation));
+	let localSource = $state('');
+	let localManipulation = $state<TManipulation | null>(null);
 
 	$effect(() => {
 		localSource = source;
 		localManipulation = cloneManipulation(manipulation);
 	});
 
-	let result = $derived(applyManipulations(localSource, [localManipulation]));
+	let result = $derived(
+		localManipulation ? applyManipulations(localSource, [localManipulation]) : localSource
+	);
 </script>
 
 <div>
 	<TextArea bind:value={localSource} />
-	<Manipulation bind:manipulation={localManipulation} />
+	{#if localManipulation}
+		<Manipulation bind:manipulation={localManipulation} />
+	{/if}
 	<TextArea bind:value={result} />
 </div>
 

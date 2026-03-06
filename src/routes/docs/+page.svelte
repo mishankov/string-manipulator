@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { type TManipulation } from '$lib/manipulations';
 	import Link from '$lib/components/Link.svelte';
 	import ManipulationBlock from './ManipulationBlock.svelte';
@@ -101,11 +100,6 @@
 	}
 
 	let docsState = $state(cloneDocsTemplate());
-
-	onMount(() => {
-		// Ensure route always starts from canonical examples after refresh.
-		docsState = cloneDocsTemplate();
-	});
 </script>
 
 <div class="container">
